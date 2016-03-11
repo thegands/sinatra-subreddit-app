@@ -7,6 +7,16 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
+  helpers do
+		def logged_in?
+			!!session[:id]
+		end
+
+		def current_user
+			User.find(session[:id])
+		end
+	end
+
 	get '/' do
 		"Sinatra is up!"
 		#@user = User.find params[:id]
