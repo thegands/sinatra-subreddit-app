@@ -5,5 +5,6 @@ class CreateComments < ActiveRecord::Migration
       t.belongs_to :user
       t.belongs_to :topic
       t.timestamps
+    end
   end
 end
