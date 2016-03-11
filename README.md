@@ -1,7 +1,7 @@
-Sinatra Subreddit App
+Toast-It
 ====================
 
-A Sinatra application meant to mimic the functionality of a single subreddit of reddit. It will function and run out of the box when deployed to [OpenShift](https://www.openshift.com/).
+Toast-It is a Sinatra application meant to mimic some the functionality of reddit. It will function and run out of the box when deployed to [OpenShift](https://www.openshift.com/).
 
 
 Running this application locally
@@ -11,7 +11,7 @@ Before running any of these examples, you should run the below command to make s
 
 		bundle install --without production
 
-To run this application locally, cd into the sinatra-subreddit-app directory that you cloned and run
+To run this application locally, cd into the toast directory that you cloned and run
 
 		shotgun
 
