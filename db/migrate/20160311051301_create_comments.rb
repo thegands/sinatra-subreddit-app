@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration
       t.text :content, null: false
       t.belongs_to :user
       t.belongs_to :topic
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

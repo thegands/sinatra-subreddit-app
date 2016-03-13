@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{ charset: 'utf-8'}
+    %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport'}
+
+    %title
+      My Application
+
+    %link{href: '//fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
+    = stylesheet_tag 'app'
+    = javascript_tag 'app'
+
+  %body
+    %nav
+      .nav-wrapper
+        %a.brand-logo{href: '#'}
+          %i.fa.fa-beer
+          Toast-It
+        %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
+          %i.material-icons menu
+        %ul.right.hide-on-med-and-down
+          %li
+            %form
+              .input-field
+                %input#search{type: 'search', required: true, placeholder: 'Search'}
+                %label{for: 'search'}
+                  %i.material-icons search
+                %i.material-icons close
+          %li
+            %a{href: '#'} Login
+        %ul.side-nav#mobile-demo
+          %li
+            %form
+              .input-field
+                %input#search{type: 'search', required: true, placeholder: 'Search'}
+                %label{for: 'search'}
+                  %i.material-icons search
+                %i.material-icons close
+          %li
+            %a{href: '#'} Login
+
+    .container
+      = yield

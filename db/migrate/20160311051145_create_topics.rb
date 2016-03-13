@@ -4,7 +4,7 @@ class CreateTopics < ActiveRecord::Migration
       t.string :title, null: false
       t.text :content, null: false
       t.belongs_to :user
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

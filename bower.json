@@ -1,0 +1,9 @@
+{
+  "name": "toast-it",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "~2.0",
+    "materialize": "~0.97.5",
+    "font-awesome": "~4.0"
+  }
+}

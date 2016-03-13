@@ -1,19 +1,61 @@
-RACK_ENV ||= ENV["RACK_ENV"] || "development"
+RACK_ENV ||= ENV['RACK_ENV'] || 'development'
+require 'bundler'
+Bundler.require :default, RACK_ENV.to_sym
 
-require 'bundler/setup'
-Bundler.require(:default, RACK_ENV)
+require 'dotenv'
+Dotenv.load
 
+if RACK_ENV != 'production'
+  require 'better_errors'
+end
+
+# Load all libraries
+# require_all 'lib/**/*.rb'
+
+# Load models and workers
 require_all 'app'
+# Dir.glob('./app/{/models,routes,api}/**/*.rb').each { |file| require file }
 
-dbconfig = YAML.load(ERB.new(File.read("config/database.yml")).result)
+class Web < Sinatra::Base
+  configure do
 
-# YOU MUST SET THE ENV RACK_ENV to 'production' FOR YOUR CATRIDGE
-ActiveRecord::Base.establish_connection dbconfig[RACK_ENV]
+    register Sinatra::ActiveRecordExtension
 
-if ENV["OPENSHIFT_RUBY_LOG_DIR"]
-	LOG_FILE = "#{ENV["OPENSHIFT_RUBY_LOG_DIR"]}/#{RACK_ENV}.log"
-	ActiveRecord::Base.logger = Logger.new(File.open(LOG_FILE, 'a+'))
-else
-	Dir.mkdir('log') if !File.exist?('log') || !File.directory?('log')
-	ActiveRecord::Base.logger = Logger.new(File.open("log/#{RACK_ENV}.log", "a+"))
+    register Sinatra::Contrib
+    register Sinatra::Partial
+
+    use Rack::CommonLogger
+
+    enable :sessions, :logging, :dump_errors, :raise_errors, :show_exceptions, :static
+    enable :partial_underscores
+
+    set :root, File.expand_path('..', File.dirname(__FILE__))
+    set :partial_template_engine, :haml
+
+    set :database_file, "config/database.yml"
+
+    set :environments, %w{development test production}
+    set :views, Proc.new { File.join(root, "app/views") }
+
+    set :assets_prefix, %w(assets app/assets vendor/assets)
+    set :assets_css_compressor, :sass
+    set :assets_js_compressor, :uglifier
+    register Sinatra::AssetPipeline
+
+    config_file 'config/config.yml'
+
+    if defined?(RailsAssets)
+      RailsAssets.load_paths.each do |path|
+        settings.sprockets.append_path(path)
+      end
+    end
+  end
+
+  configure :development do
+    use BetterErrors::Middleware
+    BetterErrors.application_root = root
+  end
+
+  configure :production do
+  end
 end

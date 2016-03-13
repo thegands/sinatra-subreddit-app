@@ -1,4 +1,10 @@
-require './config/environment.rb'
+require File.dirname(__FILE__) + '/app'
 
-use UserController
-run ApplicationController
+# Load initializers
+Dir[File.dirname(__FILE__) + '/config/initializers/*.rb'].each {|file| require file }
+
+
+  
+  run Rack::URLMap.new('/' => Web)
+  
+
