@@ -1,0 +1,17 @@
+%main.container
+  .row
+    %form.col.s12{action: '/toast-it/topics', method: 'post'}
+      .row
+        %h4.col.s12 Create a new topic
+      .row
+        .input-field.col.s12
+          %input.validate#title{type: 'text', name: 'title', required: true}
+          %label{for: 'title'} Topic Title
+        .input-field.col.s12
+          %textarea.materialize-textarea#content{name: 'content', required: true}
+          %label{for: 'content'} Topic Contents
+      .row
+        .col.s12
+          %button.btn.waves-effect.waves-light.right{type: 'submit'}
+            Create Topic
+            %i.material-icons.right send

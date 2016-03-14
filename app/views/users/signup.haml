@@ -1,18 +1,28 @@
 %main.container
   .row
-    - unless locals.empty?
-      =message
     %form.col.s12{action: '/signup', method: 'post'}
       .row
-        .input-field.col.s12
-          %input.validate#name{type: 'text', name: 'name'}
+        %h4.col.s12.l10.offset-l1 Create a new account
+      .row
+        .input-field.col.s12.l10.offset-l1
+          - if session[:failed_name]
+            %input.validate#name{type: 'text', name: 'name', required: true, value: session[:failed_name]}
+          - else
+            %input.validate#name{type: 'text', name: 'name', required: true}
           %label{for: 'name'} Username
-        .input-field.col.s12
-          %input.validate#password{type: 'password', name: 'password'}
+      .row
+        .input-field.col.s12.l10.offset-l1
+          - if locals.empty?
+            %input.validate#password{type: 'password', name: 'password', required: true}
+          - else
+            %input.validate#password{type: 'password', name: 'password', required: true, placeholder: message, autofocus: true}
           %label{for: 'password'} Password
-        .input-field.col.s12
-          %input.validate#confirm_password{type: 'password', name: 'confirm_password'}
+      .row
+        .input-field.col.s12.l10.offset-l1
+          %input.validate#confirm_password{type: 'password', name: 'confirm_password', required: true}
           %label{for: 'confirm_password'} Confirm Password
-        %button.btn.waves-effect.waves-light{type: 'submit'}
-          Signup
-          %i.material-icons.right send
+      .row
+        .col.s12.l11
+          %button.btn.waves-effect.waves-light.right{type: 'submit'}
+            Signup
+            %i.material-icons.right send

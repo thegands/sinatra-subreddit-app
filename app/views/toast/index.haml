@@ -1,34 +1,37 @@
+-# Create a Topic Fixed Menu
 .fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
   %a.btn-floating.btn-large.indigo
     %i.large.mdi-navigation-menu
   %ul
     %li
       %a.btn-floating.blue{href: '#'}
-        %i.fa.fa-link
+        %i.material-icons link
     %li
-      %a.btn-floating.red{href: '#'}
+      %a.btn-floating.red{href: '/toast-it/topics/new'}
         %i.large.material-icons mode_edit
 
+-# Topic List
 %main.container
-  %ul.topic-list.collection
+  %ul.topic.collection
     - Topic.all.each do |topic|
-      %li.collection-item
-        .row.valign-wrapper
-          .col.s2.valign
-            %ul.center-align.vote
-              %li
-                %form{action: '/topic/1/score', method: 'post'}
-                  %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'true'}
-                    %i.fa.fa-beer
-              %li.score 10
-              %li
-                %form{action: '/topic/1/score', method: 'post'}
-                  %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'false'}
-                    %i.fa.fa-beer.fa-flip-vertical
-          .col.s10
-            %h5.valign-wrapper
-              %a.title.truncate{href: '#'} #{topic.title}
-              %a.chip.valign{href: '#'} #{topic.comments.count} comments
-            %h6
+      %li.collection-item.valign-wrapper
+        %ul.vote.center-align.valign
+          %li
+            %form{action: "/toast-it/topics/toast/#{topic.id}", method: 'post'}
+              %button.waves-effect.waves-green.btn-flat{type: 'submit', liked: 'true'}
+                %i.fa.fa-beer
+          %li.score 0
+          %li
+            %form{action: "/toast-it/topics/toast/#{topic.id}", method: 'post'}
+              %button.waves-effect.waves-red.btn-flat{type: 'submit', liked: 'false'}
+                %i.fa.fa-beer.fa-flip-vertical
+        %i.material-icons.small.circle.valign insert_comment
+        %ul.valign.topic
+          %li
+            %h5
+              %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
+          %li
+            %p.topic-metadata
+              %a.chip{href: "/toast-it/topics/#{topic.id}"} #{topic.comments.count} comments
               Submitted 30 minutes ago by
               %a{href: '#'} #{topic.user.name}

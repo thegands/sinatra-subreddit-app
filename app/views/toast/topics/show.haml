@@ -1,0 +1,48 @@
+%main.container
+  -# Topic Title
+  .row
+    %ul.topic.collection
+      %li.collection-item.valign-wrapper
+        %ul.vote.center-align.valign
+          %li
+            %form{action: "/toast-it/topics/toast/#{@topic.id}", method: 'post'}
+              %button.waves-effect.waves-green.btn-flat{type: 'submit', liked: 'true'}
+                %i.fa.fa-beer
+          %li.score 0
+          %li
+            %form{action: "/toast-it/topics/toast/#{@topic.id}", method: 'post'}
+              %button.waves-effect.waves-red.btn-flat{type: 'submit', liked: 'false'}
+                %i.fa.fa-beer.fa-flip-vertical
+        %i.material-icons.small.circle.valign insert_comment
+        %ul.valign.topic
+          %li
+            %h5
+              %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
+          %li
+            %p.topic-metadata#show
+              %a.chip{href: "/toast-it/topics/#{@topic.id}"} #{@topic.comments.count} comments
+              Submitted 30 minutes ago by
+              %a{href: '#'} #{@topic.user.name}
+            %p #{@topic.content}
+    -# Topic Reply
+    %ul.topic.collapsible{data: {collapsible: 'accordion'}}
+      %li
+        .collapsible-header
+          %i.material-icons reply
+          Reply
+        .collapsible-body
+          %form{action: "/toast-it/topics/#{@topic.id}", method: 'post'}
+            .row
+              .input-field.col.s10.offset-s1
+                %textarea.materialize-textarea#reply{name: 'comment[content]', required: true}
+                %label{for: 'reply'} Your Reply
+            .row
+              .col.s11
+                %button.btn.waves-effect.waves-light.right{type: 'submit'}
+                  Post Reply
+                  %i.material-icons.right send
+  -# Topic Comments
+  .row
+    %ul.comment.collection
+      - @topic.comments.each do |comment|
+        %li.collection-item #{comment.content}

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :name, uniqueness: true
 
   has_many :topics
-  has_many :comments, through: :topics
+  has_many :comments
 
   include Slugify
 

@@ -14278,36 +14278,68 @@ body main {
   flex: 1 0 auto;
 }
 /* line 9, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper {
-  margin-bottom: 0;
+body main input#password::-webkit-input-placeholder {
+  color: rgba(184, 1, 1, 0.4);
 }
-/* line 11, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper h5 {
-  margin-top: 0;
+/* line 12, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main input#password:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(184, 1, 1, 0.4);
 }
-/* line 14, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .title {
-  padding-right: 5px;
+/* line 16, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main input#password::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(184, 1, 1, 0.4);
 }
-/* line 17, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .vote {
-  font-size: 1.5em;
-}
-/* line 19, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .vote button {
-  padding: 0 1rem;
-}
-/* line 21, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .vote button.btn-flat:focus {
-  background-color: transparent;
+/* line 20, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main input#password:-ms-input-placeholder {
+  color: rgba(184, 1, 1, 0.4);
 }
 /* line 26, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .chip {
-  white-space: nowrap;
+body main .topic.collection .collection-item {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 /* line 29, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic-list .row.valign-wrapper .score {
-  padding: 0 1rem;
+body main .topic.collection .collection-item ul.topic {
+  width: 100%;
+}
+/* line 32, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item ul.vote {
+  max-width: 31px;
+}
+/* line 34, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item ul.vote button {
+  padding: 0 6px;
+}
+/* line 36, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item ul.vote button.btn-flat:focus {
+  background-color: transparent;
+}
+/* line 41, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item h5 {
+  margin-top: 0;
+}
+/* line 44, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item .chip {
+  white-space: nowrap;
+}
+/* line 47, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item p.topic-metadata {
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+/* line 50, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item p.topic-metadata#show {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 55, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .topic.collection .collection-item i.circle {
+  background-color: #999;
+  color: white;
+  padding: 10px;
+  margin: 0 5px;
 }
 /* line 1, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/state.css.scss */
 .full-height {

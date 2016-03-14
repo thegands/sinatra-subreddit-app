@@ -10,9 +10,21 @@
     = stylesheet_tag 'app'
 
   %body
+    - if logged_in?
+      - user = current_user
+      %ul.dropdown-content#account
+        %li
+          %a{href: '#'} Account
+        %li
+          %a{href: '/logout'} Logout
+      %ul.dropdown-content#mobile_account
+        %li
+          %a{href: '#'} Account
+        %li
+          %a{href: '/logout'} Logout
     %nav
       .nav-wrapper
-        %a.brand-logo.center{href: '#'}
+        %a.brand-logo.center{href: '/toast-it'}
           %i.fa.fa-beer
           Toast-It
         %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
@@ -31,7 +43,12 @@
                   %i.material-icons search
                 %i.material-icons close
           %li
-            %a{href: '#'} Login
+            - if logged_in?
+              %a.dropdown-button{href: '#!', data: {activates: 'account'}}
+                #{user.name}
+                %i.material-icons.right arrow_drop_down
+            - else
+              %a{href: '/login'} Login
         %ul.side-nav#mobile-demo
           %li
             %form
@@ -41,7 +58,12 @@
                   %i.material-icons search
                 %i.material-icons close
           %li
-            %a{href: '#'} Login
+            - if logged_in?
+              %a.dropdown-button{href: '#!', data: {activates: 'mobile_account'}}
+                #{user.name}
+                %i.material-icons.right arrow_drop_down
+            - else
+              %a{href: '/login'} Login
           %li.active
             %a{href: '#'} Top
           %li

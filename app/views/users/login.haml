@@ -1,16 +1,28 @@
 %main.container
   .row
-    - unless locals.empty?
-      =message
     %form.col.s12{action: '/login', method: 'post'}
       .row
-        .input-field.col.s12
-          %input.validate#name{type: 'text', name: 'name'}
+        %h4.col.s12 Login to your account
+      .row
+        .input-field.col.s12.l6
+          - if session[:failed_name]
+            %input.validate#name{type: 'text', name: 'name', required: true, value: session[:failed_name]}
+          - else
+            %input.validate#name{type: 'text', name: 'name', required: true}
           %label{for: 'name'} Username
-        .input-field.col.s12
-          %input.validate#password{type: 'password', name: 'password'}
+        .input-field.col.s12.l6
+          - if locals.empty?
+            %input.validate#password{type: 'password', name: 'password', required: true}
+          - else
+            %input.validate#password{type: 'password', name: 'password', required: true, placeholder: message, autofocus: true}
           %label{for: 'password'} Password
-        .input-field.col.s12
-        %button.btn.waves-effect.waves-light{type: 'submit'}
-          Login
-          %i.material-icons.right send
+      .row
+        .col.s4.push-s8
+          %button.btn.waves-effect.waves-light.right{type: 'submit'}
+            Login
+            %i.material-icons.right send
+        .col.s8.pull-s4
+          Dont have an account?
+          %a.waves-effect.waves-orange.btn-flat{href: '/signup'}
+            Create one!
+            %i.material-icons.right account_box
