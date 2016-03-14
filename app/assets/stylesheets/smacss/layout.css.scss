@@ -1,1 +1,36 @@
-
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  main {
+    flex: 1 0 auto;
+    .topic-list {
+      .row {
+        &.valign-wrapper {
+          margin-bottom: 0;
+          h5 {
+            margin-top: 0;
+          }
+          .title {
+            padding-right: 5px;
+          }
+          .vote {
+            font-size: 1.5em;
+            button {
+              padding: 0 1rem;
+              &.btn-flat:focus {
+                background-color: transparent;
+              }
+            }
+          }
+          .chip {
+            white-space: nowrap;
+          }
+          .score {
+            padding: 0 1rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,21 +4,24 @@
     %meta{ charset: 'utf-8'}
     %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport'}
 
-    %title
-      My Application
+    %title Toast-It
 
     %link{href: '//fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
     = stylesheet_tag 'app'
-    = javascript_tag 'app'
 
   %body
     %nav
       .nav-wrapper
-        %a.brand-logo{href: '#'}
+        %a.brand-logo.center{href: '#'}
           %i.fa.fa-beer
           Toast-It
         %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
           %i.material-icons menu
+        %ul.left.hide-on-med-and-down.truncate
+          %li.active
+            %a{href: '#'} Top
+          %li
+            %a{href: '#'} New
         %ul.right.hide-on-med-and-down
           %li
             %form
@@ -39,6 +42,33 @@
                 %i.material-icons close
           %li
             %a{href: '#'} Login
+          %li.active
+            %a{href: '#'} Top
+          %li
+            %a{href: '#'} New
 
-    .container
-      = yield
+    = yield
+
+    %footer.page-footer
+      .container
+        .row
+          .col.l6.s12
+            %h5.white-text About
+            %p.grey-text.text-lighten-4 Toast-It is a Sinatra application meant to mimic some of the functionality of Reddit.
+          .col.l4.offset-12.s12
+            %h5.white-text Tech
+            %ul
+              %li
+                %a.grey-text.text-lighten-3{href: 'http://www.sinatrarb.com/'} Sinatra
+              %li
+                %a.grey-text.text-lighten-3{href: 'http://materializecss.com/'} Materialize
+              %li
+                %a.grey-text.text-lighten-3{href: 'http://haml.info/'} Haml
+              %li
+                %a.grey-text.text-lighten-3{href: 'https://www.openshift.com/'} OpenShift
+      .footer-copyright
+        .container
+          © Copyright free / Public Domain
+          %a.grey-text.text-lighten-4.right{href: 'https://github.com/thegands/toast-it'} GitHub
+
+    = javascript_tag 'app'

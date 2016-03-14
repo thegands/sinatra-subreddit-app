@@ -5,38 +5,41 @@ module Sinatra
         def self.registered(app)
           app.get '/signup' do
             if logged_in?
-              redirect '/tweets'
+              redirect '/toast-it'
             else
-              erb :'users/signup'
+              haml :'users/signup'
             end
           end
 
           app.post '/signup' do
-            user = User.new(params)
-            if user.save
-              session[:id] = user.id
-              redirect '/tweets'
+            if params[:password] == params[:confirm_password]
+              user = User.new(name: params[:name], password: [:password])
+              if user.save
+                session[:id] = user.id
+                redirect '/toast-it'
+              else
+                haml :'users/signup', locals: {message: "Registration invalid. Please try again"}
+              end
             else
-              erb :'users/signup', locals: {message: "Registration invalid. Please try again"}
-              redirect '/signup'
+              haml :'users/signup', locals: {message: "Passwords did not match. Please try again"}
             end
           end
 
           app.get '/login' do
             if logged_in?
-              redirect '/tweets'
+              redirect '/toast-it'
             else
-              erb :'users/login'
+              haml :'users/login'
             end
           end
 
           app.post '/login' do
-            user = User.find_by(name: params[:username])
+            user = User.find_by(name: params[:name])
             if user && user.authenticate(params[:password])
               session[:id] = user.id
-              redirect '/tweets'
+              redirect '/toast-it'
             else
-              erb :'users/login', locals: {message: "Login failed. Please try again"}
+              haml :'users/login', locals: {message: "Login failed. Please try again"}
             end
           end
 

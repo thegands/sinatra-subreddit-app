@@ -1,0 +1,34 @@
+.fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
+  %a.btn-floating.btn-large.indigo
+    %i.large.mdi-navigation-menu
+  %ul
+    %li
+      %a.btn-floating.blue{href: '#'}
+        %i.fa.fa-link
+    %li
+      %a.btn-floating.red{href: '#'}
+        %i.large.material-icons mode_edit
+
+%main.container
+  %ul.topic-list.collection
+    - Topic.all.each do |topic|
+      %li.collection-item
+        .row.valign-wrapper
+          .col.s2.valign
+            %ul.center-align.vote
+              %li
+                %form{action: '/topic/1/score', method: 'post'}
+                  %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'true'}
+                    %i.fa.fa-beer
+              %li.score 10
+              %li
+                %form{action: '/topic/1/score', method: 'post'}
+                  %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'false'}
+                    %i.fa.fa-beer.fa-flip-vertical
+          .col.s10
+            %h5.valign-wrapper
+              %a.title.truncate{href: '#'} #{topic.title}
+              %a.chip.valign{href: '#'} #{topic.comments.count} comments
+            %h6
+              Submitted 30 minutes ago by
+              %a{href: '#'} #{topic.user.name}

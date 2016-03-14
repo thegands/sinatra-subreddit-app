@@ -4,7 +4,7 @@ module Sinatra
       module ToastItRoute
         def self.registered(app)
           app.get  '/toast-it' do
-            haml :'homepage/index'
+            haml :'toast/index'
           end
         end
       end

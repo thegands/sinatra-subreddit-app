@@ -8,6 +8,22 @@ class Web < Sinatra::Base
   register Sinatra::Web::Routing::ToastItRoute
   register Sinatra::Web::Routing::Homepage
 
+  # Helpers
+  helpers do
+    def logged_in?
+      !!session[:id]
+    end
+
+    def current_user
+      User.find(session[:id])
+    end
+  end
+
+  get '/' do
+    "Sinatra is up!"
+    #@user = User.find params[:id]
+  end
+
   # Errors
   not_found do
     haml :'404'

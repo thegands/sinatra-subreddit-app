@@ -27,6 +27,7 @@ class Web < Sinatra::Base
     use Rack::CommonLogger
 
     enable :sessions, :logging, :dump_errors, :raise_errors, :show_exceptions, :static
+    set :session_secret, "password_security"
     enable :partial_underscores
 
     set :root, File.expand_path('..', File.dirname(__FILE__))
