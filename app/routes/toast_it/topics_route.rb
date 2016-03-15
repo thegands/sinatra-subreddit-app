@@ -6,6 +6,9 @@ module Sinatra
 
           ['/toast-it', '/toast-it/topics'].each do |path|
             app.get path do
+              if current_user
+                @user = current_user
+              end
               haml :'toast/index'
             end
           end

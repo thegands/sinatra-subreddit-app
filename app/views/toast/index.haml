@@ -14,7 +14,7 @@
 %main.container
   %ul.topic.collection
     - Topic.all.each do |topic|
-      - liked = topic.liked?(current_user) if current_user
+      - liked = topic.liked?(@user) if @user
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
           %li
