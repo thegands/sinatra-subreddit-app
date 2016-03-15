@@ -14301,40 +14301,26 @@ body main .topic.collection .collection-item {
   padding-left: 10px;
 }
 /* line 29, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic.collection .collection-item ul.topic {
-  width: 100%;
-}
-/* line 32, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.vote {
   max-width: 31px;
 }
-/* line 34, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 31, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.vote button {
   padding: 0 6px;
 }
-/* line 36, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 33, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.vote button.btn-flat:focus {
   background-color: transparent;
 }
-/* line 41, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic.collection .collection-item h5 {
-  margin-top: 0;
-}
-/* line 44, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 38, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item .chip {
   white-space: nowrap;
 }
-/* line 47, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 41, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item p.topic-metadata {
-  margin-bottom: 0;
   color: rgba(0, 0, 0, 0.6);
 }
-/* line 50, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
-body main .topic.collection .collection-item p.topic-metadata#show {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e0e0e0;
-}
-/* line 55, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 44, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item i.circle {
   background-color: #999;
   color: white;

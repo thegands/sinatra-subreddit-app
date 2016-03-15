@@ -1,12 +1,12 @@
 !!!
 %html
   %head
-    %meta{ charset: 'utf-8'}
-    %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    %meta{ charset: 'utf-8'}/
+    %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport'}/
 
     %title Toast-It
 
-    %link{href: '//fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
+    %link{href: '//fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}/
     = stylesheet_tag 'app'
 
   %body
@@ -30,10 +30,18 @@
         %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
           %i.material-icons menu
         %ul.left.hide-on-med-and-down.truncate
-          %li.active
-            %a{href: '#'} Top
-          %li
-            %a{href: '#'} New
+          - if request.path_info == '/toast-it'
+            %li.active
+              %a{href: '#'} Top Toasts
+          - else
+            %li
+              %a{href: '#'} Top Toasts
+          - if request.path_info == '/toast-it/new'
+            %li.active
+              %a{href: '#'} New Toasts
+          - else
+            %li
+              %a{href: '#'} New Toasts
         %ul.right.hide-on-med-and-down
           %li
             %form
@@ -65,9 +73,9 @@
             - else
               %a{href: '/login'} Login
           %li.active
-            %a{href: '#'} Top
+            %a{href: '#'} Top Toasts
           %li
-            %a{href: '#'} New
+            %a{href: '#'} New Toasts
 
     = yield
 

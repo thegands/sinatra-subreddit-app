@@ -1,7 +1,7 @@
 %main.container
   -# Topic Title
   .row
-    %ul.topic.collection
+    %ul.topic.collection.col.s12
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
           %li
@@ -13,36 +13,37 @@
             %form{action: "/toast-it/topics/toast/#{@topic.id}", method: 'post'}
               %button.waves-effect.waves-red.btn-flat{type: 'submit', liked: 'false'}
                 %i.fa.fa-beer.fa-flip-vertical
-        %i.material-icons.small.circle.valign insert_comment
         %ul.valign.topic
           %li
             %h5
               %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
           %li
-            %p.topic-metadata#show
-              %a.chip{href: "/toast-it/topics/#{@topic.id}"} #{@topic.comments.count} comments
+            %p.topic-metadata
+              %a.chip{href: '#comments'} #{@topic.comments.count} comments
               Submitted 30 minutes ago by
               %a{href: '#'} #{@topic.user.name}
-            %p #{@topic.content}
+      %li.collection-item.valign-wrapper
+        %p #{@topic.content}
     -# Topic Reply
-    %ul.topic.collapsible{data: {collapsible: 'accordion'}}
-      %li
-        .collapsible-header
-          %i.material-icons reply
-          Reply
-        .collapsible-body
-          %form{action: "/toast-it/topics/#{@topic.id}", method: 'post'}
-            .row
-              .input-field.col.s10.offset-s1
-                %textarea.materialize-textarea#reply{name: 'comment[content]', required: true}
-                %label{for: 'reply'} Your Reply
-            .row
-              .col.s11
-                %button.btn.waves-effect.waves-light.right{type: 'submit'}
-                  Post Reply
-                  %i.material-icons.right send
+    - if logged_in?
+      %ul.topic.collapsible{data: {collapsible: 'accordion'}}
+        %li
+          .collapsible-header
+            %i.material-icons reply
+            Reply
+          .collapsible-body
+            %form{action: "/toast-it/topics/#{@topic.id}", method: 'post'}
+              .row
+                .input-field.col.s10.offset-s1
+                  %textarea.materialize-textarea#reply{name: 'comment[content]', required: true}
+                  %label{for: 'reply'} Your Reply
+              .row
+                .col.s11
+                  %button.btn.waves-effect.waves-light.right{type: 'submit'}
+                    Post Reply
+                    %i.material-icons.right send
   -# Topic Comments
   .row
-    %ul.comment.collection
+    %ul.collection#comments
       - @topic.comments.each do |comment|
         %li.collection-item #{comment.content}

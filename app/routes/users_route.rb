@@ -5,7 +5,7 @@ module Sinatra
         def self.registered(app)
           app.get '/signup' do
             if logged_in?
-              redirect '/toast-it'
+              url_redirect
             else
               session.delete(:failed_name)
               haml :'users/signup'
@@ -18,7 +18,7 @@ module Sinatra
               if user.save
                 session.delete(:failed_name)
                 session[:id] = user.id
-                redirect '/toast-it'
+                url_redirect
               else
                 session[:failed_name] = params[:name]
                 haml :'users/signup', locals: {message: "Registration invalid. Please try again"}
@@ -31,7 +31,7 @@ module Sinatra
 
           app.get '/login' do
             if logged_in?
-              redirect '/toast-it'
+              url_redirect
             else
               session.delete(:failed_name)
               haml :'users/login'
@@ -43,7 +43,7 @@ module Sinatra
             if user && user.authenticate(params[:password])
               session[:id] = user.id
               session.delete(:failed_name)
-              redirect '/toast-it'
+              url_redirect
             else
               session[:failed_name] = params[:name]
               haml :'users/login', locals: {message: "Login information invalid. Please try again"}

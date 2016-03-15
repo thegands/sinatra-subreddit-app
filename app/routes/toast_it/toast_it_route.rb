@@ -16,6 +16,7 @@ module Sinatra
             if logged_in?
               haml :'toast/topics/new'
             else
+              session[:redir] = request.path_info
               redirect '/login'
             end
           end
@@ -46,6 +47,7 @@ module Sinatra
                 "error"
               end
             else
+              session[:redir] = request.path_info
               redirect '/login'
             end
           end

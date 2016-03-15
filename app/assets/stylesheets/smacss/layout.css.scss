@@ -26,9 +26,6 @@ body {
       .collection-item {
         padding-right: 10px;
         padding-left: 10px;
-        ul.topic {
-          width: 100%;
-        }
         ul.vote {
           max-width: 31px;
           button {
@@ -38,19 +35,11 @@ body {
             }
           }
         }
-        h5 {
-          margin-top: 0;
-        }
         .chip {
           white-space: nowrap;
         }
         p.topic-metadata {
-          margin-bottom: 0;
           color: rgba(0, 0, 0, 0.6);
-          &#show {
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-          }
         }
         i.circle {
           background-color: #999;

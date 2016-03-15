@@ -17,6 +17,14 @@ class Web < Sinatra::Base
     def current_user
       User.find(session[:id])
     end
+
+    def url_redirect
+      if session[:redir]
+        redirect session[:redir]
+      else
+        redirect '/toast-it'
+      end
+    end
   end
 
   get '/' do
