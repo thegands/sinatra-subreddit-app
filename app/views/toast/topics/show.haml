@@ -30,8 +30,7 @@
               %a.chip{href: '#comments'} #{@topic.comments.count} comments
               Submitted 30 minutes ago by
               %a{href: '#'} #{@topic.user.name}
-      %li.collection-item.valign-wrapper
-        %p #{@topic.content}
+      %li.collection-item #{markdown(@topic.content)}
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}
@@ -54,4 +53,4 @@
   .row
     %ul.collection.z-depth-1#comments
       - @topic.comments.each do |comment|
-        %li.collection-item #{comment.content}
+        %li.collection-item #{markdown(comment.content)}

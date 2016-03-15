@@ -15,6 +15,7 @@ gem 'sinatra-contrib',        :require => 'sinatra/contrib'
 gem 'sinatra-partial',        :require => 'sinatra/partial'
 gem 'tilt', '1.4.1'
 gem 'uglifier'
+gem 'rdiscount'
 
 
 group :production do
