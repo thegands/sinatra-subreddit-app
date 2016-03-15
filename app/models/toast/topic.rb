@@ -13,4 +13,13 @@ class Topic < ActiveRecord::Base
     score.liked if score
   end
 
+  def self.top_topics
+    self.all.sort { |a,b| b.score <=> a.score }
+  end
+
+  def self.new_topics
+    self.all.reverse
+  end
+
+
 end

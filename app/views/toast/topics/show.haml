@@ -1,7 +1,7 @@
 %main.container
   -# Topic Title
   .row
-    %ul.topic.collection
+    %ul.topic.collection.z-depth-1
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
           %li
@@ -39,7 +39,7 @@
           .collapsible-header
             %i.material-icons reply
             Reply
-          .collapsible-body
+          .collapsible-body.white
             %form{action: "/toast-it/topics/#{@topic.id}", method: 'post'}
               .row
                 .input-field.col.s10.offset-s1
@@ -52,6 +52,6 @@
                     %i.material-icons.right send
   -# Topic Comments
   .row
-    %ul.collection#comments
+    %ul.collection.z-depth-1#comments
       - @topic.comments.each do |comment|
         %li.collection-item #{comment.content}

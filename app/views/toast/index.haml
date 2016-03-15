@@ -12,8 +12,8 @@
 
 -# Topic List
 %main.container
-  %ul.topic.collection
-    - Topic.all.each do |topic|
+  %ul.topic.collection.z-depth-1
+    - @topics.each do |topic|
       - liked = topic.liked?(@user) if @user
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign

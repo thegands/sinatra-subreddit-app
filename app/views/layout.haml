@@ -9,7 +9,7 @@
     %link{href: '//fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}/
     = stylesheet_tag 'app'
 
-  %body
+  %body.orange.lighten-5
     - if logged_in?
       - user = current_user
       %ul.dropdown-content#account
@@ -30,18 +30,18 @@
         %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
           %i.material-icons menu
         %ul.left.hide-on-med-and-down.truncate
-          - if request.path_info == '/toast-it'
+          - if request.path_info == '/toast-it' || request.path_info == '/toast-it/topics' || request.path_info == '/toast-it/top'
             %li.active
-              %a{href: '#'} Top Toasts
+              %a{href: '/toast-it'} Top Toasts
           - else
             %li
-              %a{href: '#'} Top Toasts
+              %a{href: '/toast-it'} Top Toasts
           - if request.path_info == '/toast-it/new'
             %li.active
-              %a{href: '#'} New Toasts
+              %a{href: '/toast-it/new'} New Toasts
           - else
             %li
-              %a{href: '#'} New Toasts
+              %a{href: '/toast-it/new'} New Toasts
         %ul.right.hide-on-med-and-down
           %li
             %form
@@ -72,10 +72,18 @@
                 %i.material-icons.right arrow_drop_down
             - else
               %a{href: '/login'} Login
-          %li.active
-            %a{href: '#'} Top Toasts
-          %li
-            %a{href: '#'} New Toasts
+          - if request.path_info == '/toast-it' || request.path_info == '/toast-it/topics' || request.path_info == '/toast-it/top'
+            %li.active
+              %a{href: '/toast-it'} Top Toasts
+          - else
+            %li
+              %a{href: '/toast-it'} Top Toasts
+          - if request.path_info == '/toast-it/new'
+            %li.active
+              %a{href: '/toast-it/new'} New Toasts
+          - else
+            %li
+              %a{href: '/toast-it/new'} New Toasts
 
     = yield
 

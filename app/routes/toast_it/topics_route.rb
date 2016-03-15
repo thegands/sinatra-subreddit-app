@@ -4,13 +4,18 @@ module Sinatra
       module TopicsRoute
         def self.registered(app)
 
-          ['/toast-it', '/toast-it/topics'].each do |path|
+          ['/toast-it', '/toast-it/topics', '/toast-it/top'].each do |path|
             app.get path do
-              if current_user
-                @user = current_user
-              end
+              @user = current_user if logged_in?
+              @topics = Topic.top_topics
               haml :'toast/index'
             end
+          end
+
+          app.get '/toast-it/new' do
+            @user = current_user if logged_in?
+            @topics = Topic.new_topics
+            haml :'toast/index'
           end
 
           app.get '/toast-it/topics/new' do
@@ -34,7 +39,7 @@ module Sinatra
 
           app.get '/toast-it/topics/:id' do
             @topic = Topic.find(params[:id])
-            if current_user
+            if logged_in?
               # binding.pry
               @user = current_user
               @liked = @topic.liked?(@user)
