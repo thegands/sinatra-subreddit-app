@@ -3,7 +3,7 @@ module Sinatra
     module Routing
       module Homepage
         def self.registered(app)
-          app.get  '/' do
+          app.get '/' do
             if logged_in?
               @user = current_user
             end

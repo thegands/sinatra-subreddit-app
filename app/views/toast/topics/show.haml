@@ -1,18 +1,26 @@
 %main.container
   -# Topic Title
   .row
-    %ul.topic.collection.col.s12
+    %ul.topic.collection
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
           %li
-            %form{action: "/toast-it/topics/toast/#{@topic.id}", method: 'post'}
-              %button.waves-effect.waves-green.btn-flat{type: 'submit', liked: 'true'}
-                %i.fa.fa-beer
-          %li.score 0
+            %form{action: "/toast-it/topics/#{@topic.id}/toast", method: 'post'}
+              - if @liked
+                %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
+                  %i.fa.fa-beer
+              - else
+                %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
+                  %i.fa.fa-beer
+          %li.score #{@topic.score}
           %li
-            %form{action: "/toast-it/topics/toast/#{@topic.id}", method: 'post'}
-              %button.waves-effect.waves-red.btn-flat{type: 'submit', liked: 'false'}
-                %i.fa.fa-beer.fa-flip-vertical
+            %form{action: "/toast-it/topics/#{@topic.id}/toast", method: 'post'}
+              - if @liked == false
+                %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
+                  %i.fa.fa-beer.fa-flip-vertical
+              - else
+                %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
+                  %i.fa.fa-beer.fa-flip-vertical
         %ul.valign.topic
           %li
             %h5
@@ -26,7 +34,7 @@
         %p #{@topic.content}
     -# Topic Reply
     - if logged_in?
-      %ul.topic.collapsible{data: {collapsible: 'accordion'}}
+      %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}
         %li
           .collapsible-header
             %i.material-icons reply

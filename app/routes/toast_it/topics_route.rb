@@ -1,18 +1,16 @@
 module Sinatra
   module Web
     module Routing
-      module ToastItRoute
+      module TopicsRoute
         def self.registered(app)
 
-          app.get  '/toast-it' do
-            haml :'toast/index'
+          ['/toast-it', '/toast-it/topics'].each do |path|
+            app.get path do
+              haml :'toast/index'
+            end
           end
 
-          app.get  '/toast-it/topics' do
-            haml :'toast/index'
-          end
-
-          app.get  '/toast-it/topics/new' do
+          app.get '/toast-it/topics/new' do
             if logged_in?
               haml :'toast/topics/new'
             else
@@ -21,7 +19,7 @@ module Sinatra
             end
           end
 
-          app.post  '/toast-it/topics' do
+          app.post '/toast-it/topics' do
             topic = Topic.new(params)
             if topic.save
               current_user.topics << topic
@@ -31,12 +29,17 @@ module Sinatra
             end
           end
 
-          app.get  '/toast-it/topics/:id' do
+          app.get '/toast-it/topics/:id' do
             @topic = Topic.find(params[:id])
+            if current_user
+              # binding.pry
+              @user = current_user
+              @liked = @topic.liked?(@user)
+            end
             haml :'toast/topics/show'
           end
 
-          app.post  '/toast-it/topics/:id' do
+          app.post '/toast-it/topics/:id' do
             if logged_in?
               comment = Comment.new(params[:comment])
               if comment.save && topic = Topic.find(params[:id])

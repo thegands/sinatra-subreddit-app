@@ -8,4 +8,9 @@ class Topic < ActiveRecord::Base
 
   include EvalScore
 
+  def liked?(user)
+    score = self.scores.detect { |s| s.user == user }
+    score.liked if score
+  end
+
 end

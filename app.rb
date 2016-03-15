@@ -4,8 +4,9 @@ require_relative 'config/environment'
 
 class Web < Sinatra::Base
   # Define routes
+  register Sinatra::Web::Routing::ScoresRoute
   register Sinatra::Web::Routing::UsersRoute
-  register Sinatra::Web::Routing::ToastItRoute
+  register Sinatra::Web::Routing::TopicsRoute
   register Sinatra::Web::Routing::Homepage
 
   # Helpers
