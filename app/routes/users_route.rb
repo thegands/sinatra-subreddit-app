@@ -14,7 +14,7 @@ module Sinatra
 
           app.post '/signup' do
             if params[:password] == params[:confirm_password]
-              user = User.new(name: params[:name], password: [:password])
+              user = User.new(name: params[:name], password: params[:password])
               if user.save
                 session.delete(:failed_name)
                 session[:id] = user.id

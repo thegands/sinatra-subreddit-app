@@ -8,7 +8,7 @@
           - if session[:failed_name]
             %input.validate#name{type: 'text', name: 'name', required: true, value: session[:failed_name]}
           - else
-            %input.validate#name{type: 'text', name: 'name', required: true}
+            %input.validate#name{type: 'text', name: 'name', required: true, autofocus: true}
           %label{for: 'name'} Username
         .input-field.col.s12.l6
           - if locals.empty?
