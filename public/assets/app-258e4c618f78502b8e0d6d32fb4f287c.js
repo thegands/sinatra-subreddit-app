@@ -16662,7 +16662,9 @@ Picker.extend( 'pickadate', DatePicker )
 }( jQuery ));
 (function() {
   $(document).ready(function() {
-    return $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav();
+    $('ul.tabs').tabs();
+    return $('.modal-trigger').leanModal();
   });
 
   return;

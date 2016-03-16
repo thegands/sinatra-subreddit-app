@@ -28,7 +28,7 @@
           %li
             %p.topic-metadata
               %a.chip{href: '#comments'} #{@topic.comments.count} comments
-              Submitted 30 minutes ago by
+              Submitted #{@topic.created_to_s} ago by
               %a{href: '#'} #{@topic.user.name}
       %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
     -# Topic Reply

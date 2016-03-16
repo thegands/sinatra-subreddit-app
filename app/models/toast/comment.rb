@@ -7,5 +7,6 @@ class Comment < ActiveRecord::Base
   validates :content, presence: true
 
   include EvalScore
+  include CreatedToS
 
 end

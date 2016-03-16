@@ -42,5 +42,5 @@
           %li
             %p.topic-metadata
               %a.chip{href: "/toast-it/topics/#{topic.id}#comments"} #{topic.comments.count} comments
-              Submitted 30 minutes ago by
+              Submitted #{topic.created_to_s} ago by
               %a{href: '#'} #{topic.user.name}

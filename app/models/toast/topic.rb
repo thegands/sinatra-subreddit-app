@@ -7,6 +7,7 @@ class Topic < ActiveRecord::Base
   validates :content, :title, presence: true
 
   include EvalScore
+  include CreatedToS
 
   def liked?(user)
     if score = Score.find_by(user: user, post: self)
