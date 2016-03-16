@@ -1,13 +1,13 @@
 -# Create a Topic Fixed Menu
 .fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
-  %a.btn-floating.btn-large.indigo
+  %a.btn-floating.btn-large.indigo<
     %i.large.mdi-navigation-menu
   %ul
-    %li
-      %a.btn-floating.blue{href: '#'}
+    %li<
+      %a.btn-floating.blue{href: '/toast-it/topics/new#link'}<
         %i.material-icons link
-    %li
-      %a.btn-floating.red{href: '/toast-it/topics/new'}
+    %li<
+      %a.btn-floating.red{href: '/toast-it/topics/new'}<
         %i.large.material-icons mode_edit
 
 -# Topic List
@@ -17,7 +17,7 @@
       - liked = topic.liked?(@user) if @user
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
-          %li
+          %li<
             %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
               - if liked
                 %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
@@ -25,8 +25,8 @@
               - else
                 %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
                   %i.fa.fa-beer
-          %li.score #{topic.score}
-          %li
+          %li.score< #{topic.score}
+          %li<
             %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
               - if liked == false
                 %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
@@ -36,11 +36,15 @@
                   %i.fa.fa-beer.fa-flip-vertical
         %i.material-icons.small.circle.valign insert_comment
         %ul.valign
-          %li
-            %h5
+          %li<
+            %h5<
               %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
-          %li
-            %p.topic-metadata
-              %a.chip{href: "/toast-it/topics/#{topic.id}#comments"} #{topic.comments.count} comments
-              Submitted #{topic.created_to_s} ago by
-              %a{href: '#'} #{topic.user.name}
+          %li<
+            %p.topic-metadata<
+              %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
+              &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
+              - if topic.user
+                %a{href: "/users/#{topic.user.name}"}> #{topic.user.name}
+              - else
+                %span.grey-text<>
+                  &= "<deleted>"

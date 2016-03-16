@@ -4,7 +4,7 @@
     %ul.topic.collection.z-depth-1
       %li.collection-item.valign-wrapper
         %ul.vote.center-align.valign
-          %li
+          %li<
             %form{action: "/toast-it/topics/#{@topic.id}/toast", method: 'post'}
               - if @liked
                 %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
@@ -12,8 +12,8 @@
               - else
                 %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
                   %i.fa.fa-beer
-          %li.score #{@topic.score}
-          %li
+          %li.score< #{@topic.score}
+          %li<
             %form{action: "/toast-it/topics/#{@topic.id}/toast", method: 'post'}
               - if @liked == false
                 %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
@@ -23,18 +23,22 @@
                   %i.fa.fa-beer.fa-flip-vertical
         %ul.valign.topic
           %li
-            %h5
+            %h5<
               %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
           %li
-            %p.topic-metadata
-              %a.chip{href: '#comments'} #{@topic.comments.count} comments
-              Submitted #{@topic.created_to_s} ago by
-              %a{href: '#'} #{@topic.user.name}
+            %p.topic-metadata<
+              %a.chip{href: '#comments'}> #{@topic.comments.count} comments
+              &nbsp;Submitted #{@topic.created_to_s} ago by&nbsp;
+              - if @topic.user
+                %a{href: "/users/#{@topic.user.name}"}> #{@topic.user.name}
+              - else
+                %span.grey-text<>
+                  &= "<deleted>"
       %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}
-        %li
+        %li<
           .collapsible-header
             %i.material-icons reply
             Reply
@@ -54,4 +58,4 @@
     .row
       %ul.collection.z-depth-1#comments
         - @topic.comments.each do |comment|
-          %li.collection-item #{RDiscount.new(comment.content, :smart, :autolink, :filter_html).to_html}
+          %li.collection-item< #{RDiscount.new(comment.content, :smart, :autolink, :filter_html).to_html}

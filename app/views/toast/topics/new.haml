@@ -1,17 +1,41 @@
 %main.container
   .row
-    %form.col.s12{action: '/toast-it/topics', method: 'post'}
+    %h4.col.s12 Create a new topic
+    .col.s12
+      %ul.tabs.orange.lighten-5
+        %li.tab.col.s6
+          %a{href: '#text'} Text Topic
+        %li.tab.col.s6
+          %a{href: '#link'} Link Topic
+    .col.s12#text
       .row
-        %h4.col.s12 Create a new topic
+        %form.col.s12{action: '/toast-it/topics', method: 'post'}
+          .row
+          .row
+            .input-field.col.s12
+              %input.validate#title{type: 'text', name: 'title', required: true}
+              %label{for: 'title'} Topic Title
+            .input-field.col.s12
+              %textarea.materialize-textarea#content{name: 'content', required: true}
+              %label{for: 'content'} Topic Contents
+          .row
+            .col.s12
+              %button.btn.waves-effect.waves-light.right{type: 'submit'}
+                Create Text Topic
+                %i.material-icons.right send
+    .col.s12#link
       .row
-        .input-field.col.s12
-          %input.validate#title{type: 'text', name: 'title', required: true}
-          %label{for: 'title'} Topic Title
-        .input-field.col.s12
-          %textarea.materialize-textarea#content{name: 'content', required: true}
-          %label{for: 'content'} Topic Contents
-      .row
-        .col.s12
-          %button.btn.waves-effect.waves-light.right{type: 'submit'}
-            Create Topic
-            %i.material-icons.right send
+        %form.col.s12{action: '/toast-it/topics', method: 'post'}
+          .row
+          .row
+            .input-field.col.s12
+              %input.validate#title{type: 'text', name: 'title', required: true}
+              %label{for: 'title'} Topic Title
+            .input-field.col.s12
+              %input.validate#content{type: 'text', name: 'content', required: true}
+              %label{for: 'content'} Topic URL
+          .row
+            .col.s12
+              %button.btn.waves-effect.waves-light.right{type: 'submit', name: 'link_topic', value: 'true'}
+                Create Link Topic
+                %i.material-icons.right send

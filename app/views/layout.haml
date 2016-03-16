@@ -13,76 +13,76 @@
     - if logged_in?
       - user = current_user
       %ul.dropdown-content#account
-        %li
+        %li<
           %a{href: '#'} Account
-        %li
+        %li<
           %a{href: '/logout'} Logout
       %ul.dropdown-content#mobile_account
-        %li
+        %li<
           %a{href: '#'} Account
-        %li
+        %li<
           %a{href: '/logout'} Logout
     %nav
       .nav-wrapper
-        %a.brand-logo.center{href: '/toast-it'}
+        %a.brand-logo.center{href: '/toast-it'}<
           %i.fa.fa-beer
           Toast-It
-        %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}
+        %a.button-collapse{href: '#', data: {activates: 'mobile-demo'}}<
           %i.material-icons menu
         %ul.left.hide-on-med-and-down.truncate
           - if request.path_info == '/toast-it' || request.path_info == '/toast-it/topics' || request.path_info == '/toast-it/top'
-            %li.active
+            %li.active<
               %a{href: '/toast-it'} Top Toasts
           - else
-            %li
+            %li<
               %a{href: '/toast-it'} Top Toasts
           - if request.path_info == '/toast-it/new'
-            %li.active
+            %li.active<
               %a{href: '/toast-it/new'} New Toasts
           - else
-            %li
+            %li<
               %a{href: '/toast-it/new'} New Toasts
         %ul.right.hide-on-med-and-down
-          %li
+          %li<
             %form
               .input-field
                 %input#search{type: 'search', required: true, placeholder: 'Search'}
-                %label{for: 'search'}
+                %label{for: 'search'}<
                   %i.material-icons search
                 %i.material-icons close
-          %li
+          %li<
             - if logged_in?
-              %a.dropdown-button{href: '#!', data: {activates: 'account'}}
+              %a.dropdown-button{href: '#!', data: {activates: 'account'}}<
                 #{user.name}
-                %i.material-icons.right arrow_drop_down
+                %i.material-icons.right> arrow_drop_down
             - else
               %a{href: '/login'} Login
         %ul.side-nav#mobile-demo
-          %li
+          %li<
             %form
               .input-field
                 %input#search{type: 'search', required: true, placeholder: 'Search'}
                 %label{for: 'search'}
                   %i.material-icons search
                 %i.material-icons close
-          %li
+          %li<
             - if logged_in?
-              %a.dropdown-button{href: '#!', data: {activates: 'mobile_account'}}
+              %a.dropdown-button{href: '#!', data: {activates: 'mobile_account'}}<
                 #{user.name}
-                %i.material-icons.right arrow_drop_down
+                %i.material-icons.right> arrow_drop_down
             - else
               %a{href: '/login'} Login
           - if request.path_info == '/toast-it' || request.path_info == '/toast-it/topics' || request.path_info == '/toast-it/top'
-            %li.active
+            %li.active<
               %a{href: '/toast-it'} Top Toasts
           - else
-            %li
+            %li<
               %a{href: '/toast-it'} Top Toasts
           - if request.path_info == '/toast-it/new'
-            %li.active
+            %li.active<
               %a{href: '/toast-it/new'} New Toasts
           - else
-            %li
+            %li<
               %a{href: '/toast-it/new'} New Toasts
 
     = yield
@@ -96,13 +96,13 @@
           .col.l4.offset-12.s12
             %h5.white-text Tech
             %ul
-              %li
+              %li<
                 %a.grey-text.text-lighten-3{href: 'http://www.sinatrarb.com/'} Sinatra
-              %li
+              %li<
                 %a.grey-text.text-lighten-3{href: 'http://materializecss.com/'} Materialize
-              %li
+              %li<
                 %a.grey-text.text-lighten-3{href: 'http://haml.info/'} Haml
-              %li
+              %li<
                 %a.grey-text.text-lighten-3{href: 'https://www.openshift.com/'} OpenShift
       .footer-copyright
         .container
