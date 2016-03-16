@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
 
   def liked?(user)
     score = self.scores.detect { |s| s.user == user }
-    score.liked if score
+    score ? score.liked : nil
   end
 
   def self.top_topics

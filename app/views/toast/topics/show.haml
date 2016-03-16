@@ -30,7 +30,7 @@
               %a.chip{href: '#comments'} #{@topic.comments.count} comments
               Submitted 30 minutes ago by
               %a{href: '#'} #{@topic.user.name}
-      %li.collection-item #{markdown(@topic.content)}
+      %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}
@@ -50,7 +50,8 @@
                     Post Reply
                     %i.material-icons.right send
   -# Topic Comments
-  .row
-    %ul.collection.z-depth-1#comments
-      - @topic.comments.each do |comment|
-        %li.collection-item #{markdown(comment.content)}
+  - if @topic.comments.count != 0
+    .row
+      %ul.collection.z-depth-1#comments
+        - @topic.comments.each do |comment|
+          %li.collection-item #{RDiscount.new(comment.content, :smart, :autolink, :filter_html).to_html}
