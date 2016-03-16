@@ -9,8 +9,9 @@ class Topic < ActiveRecord::Base
   include EvalScore
 
   def liked?(user)
-    score = self.scores.detect { |s| s.user == user }
-    score ? score.liked : nil
+    if score = Score.find_by(user: user, post: self)
+      score.liked
+    end
   end
 
   def self.top_topics
