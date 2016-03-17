@@ -13,7 +13,7 @@ module Sinatra
                 haml :'toast/topics/show'
               end
             else
-              "Requested topic not found"
+              status 404
             end
           end
 
@@ -25,7 +25,7 @@ module Sinatra
                 topic.comments << comment
                 redirect "/toast-it/topics/#{topic.id}"
               else
-                "error"
+                status 404
               end
             else
               session[:redir] = request.path_info

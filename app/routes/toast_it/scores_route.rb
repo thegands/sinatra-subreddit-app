@@ -23,12 +23,12 @@ module Sinatra
                     redirect request.referrer
                   else
                     score.destroy
-                    "an error occured during the score association"
+                    status 404
                   end
                 end
               else
                 score.destroy
-                "There was a problem or the topic was not found"
+                status 404
               end
             else
               session[:redir] = request.referrer
@@ -55,12 +55,12 @@ module Sinatra
                     redirect request.referrer
                   else
                     score.destroy
-                    "an error occured during the score association"
+                    status 404
                   end
                 end
               else
                 score.destroy
-                "There was a problem or the topic was not found"
+                status 404
               end
             else
               session[:redir] = request.referrer

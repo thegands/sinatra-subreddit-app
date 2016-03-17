@@ -35,7 +35,7 @@ module Sinatra
                 current_user.topics << topic
                 redirect "/toast-it/topics/#{topic.id}"
               else
-                "error"
+                status 404
               end
             else
               session[:redir] = request.path_info
@@ -53,7 +53,7 @@ module Sinatra
               end
               haml :'toast/topics/show'
             else
-              "Requested topic not found"
+              status 404
             end
           end
 
@@ -65,7 +65,7 @@ module Sinatra
                 topic.comments << comment
                 redirect "/toast-it/topics/#{topic.id}"
               else
-                "error"
+                status 404
               end
             else
               session[:redir] = request.path_info
@@ -93,7 +93,7 @@ module Sinatra
               if topic && topic.user == current_user && topic.update(params[:topic])
                 redirect "/toast-it/topics/#{topic.id}"
               else
-                "error"
+                status 404
               end
             else
               session[:redir] = request.path_info
@@ -109,7 +109,7 @@ module Sinatra
                 topic.destroy
                 redirect '/toast-it'
               else
-                "error"
+                status 404
               end
             else
               session[:redir] = "toast-it/topics/#{params[:id]}"
