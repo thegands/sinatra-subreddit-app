@@ -9,12 +9,6 @@ class Topic < ActiveRecord::Base
   include EvalScore
   include CreatedToS
 
-  def liked?(user)
-    if score = Score.find_by(user: user, post: self)
-      score.liked
-    end
-  end
-
   def self.new_topics
     self.order(id: :desc)
   end

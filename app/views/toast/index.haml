@@ -73,7 +73,7 @@
             %i.material-icons.small.circle link
           - else
             %i.material-icons.small.circle insert_comment
-          %ul.inline-block.topic-info
+          %ul.inline-block.post-info
             %li<
               %h5<
                 - if topic.link_topic
@@ -81,7 +81,7 @@
                 - else
                   %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
             %li<
-              %p.topic-metadata<
+              %p.post-metadata<
                 %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
                 &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
                 - if topic.user

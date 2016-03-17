@@ -21,7 +21,7 @@
               - else
                 %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
                   %i.fa.fa-beer.fa-flip-vertical
-        %ul.inline-block.topic-info
+        %ul.inline-block.post-info
           %li
             %h5<
               - if @topic.link_topic
@@ -29,7 +29,7 @@
               - else
                 %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
           %li
-            %p.topic-metadata<
+            %p.post-metadata<
               %a.chip{href: '#comments'}> #{@topic.comments.count} comments
               &nbsp;Submitted #{@topic.created_to_s} ago by&nbsp;
               - if @topic.user
@@ -62,4 +62,34 @@
     .row
       %ul.collection.z-depth-1#comments
         - @topic.comments.each do |comment|
-          %li.collection-item< #{RDiscount.new(comment.content, :smart, :autolink, :filter_html).to_html}
+          - liked = comment.liked?(@user)
+          %li.collection-item
+            %ul.vote.center-align.inline-block
+              %li<
+                %form{action: "/toast-it/comments/#{comment.id}/toast", method: 'post'}
+                  - if liked
+                    %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
+                      %i.fa.fa-beer
+                  - else
+                    %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
+                      %i.fa.fa-beer
+              %li.score< #{comment.score}
+              %li<
+                %form{action: "/toast-it/topics/#{comment.id}/toast", method: 'post'}
+                  - if liked == false
+                    %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
+                      %i.fa.fa-beer.fa-flip-vertical
+                  - else
+                    %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
+                      %i.fa.fa-beer.fa-flip-vertical
+            %ul.inline-block.post-info
+              %li<
+                %p.post-metadata<
+                  Submitted #{comment.created_to_s} ago by&nbsp;
+                  - if comment.user
+                    %a{href: "/users/#{comment.user.name}"}> #{comment.user.name}
+                  - else
+                    %span.grey-text<>
+                      &= "<deleted>"
+              %li<
+                %p #{RDiscount.new(comment.content, :smart, :autolink, :filter_html).to_html}
