@@ -1,0 +1,18 @@
+%main.container
+  .row
+    %h4.col.s12 Edit your comment
+    %ul.collection.white
+      %li.collection-item
+        .col.s12
+          .row
+            %form.col.s12{action: "/toast-it/comments/#{@comment.id}", method: 'post'}
+              %input#hidden{type: 'hidden', name: '_method', value: 'put'}
+              .row
+                .input-field.col.s12
+                  %textarea.materialize-textarea#content{name: 'comment[content]', required: true} #{@comment.content}
+                  %label{for: 'content'} Comment Contents
+              .row
+                .col.s12
+                  %button.btn.waves-effect.waves-light.right{type: 'submit'}
+                    Edit Comment
+                    %i.material-icons.right send

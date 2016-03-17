@@ -5,30 +5,44 @@ module Sinatra
         def self.registered(app)
 
           app.get '/toast-it/comments/:id' do
-            @topic = Topic.find_by_id(params[:id])
-            if @topic
-              if logged_in?
-                @user = current_user
-                @liked = @topic.liked?(@user)
-                haml :'toast/topics/show'
+            @comment = Comment.find_by_id(params[:id])
+            if @comment
+              if logged_in? && current_user == @comment.user
+                haml :'toast/comments/edit'
+              else
+                status 400
               end
             else
               status 404
             end
           end
 
-          app.post '/toast-it/comments/:id' do
+          app.put '/toast-it/comments/:id' do
             if logged_in?
-              comment = Comment.new(params[:comment])
-              if comment.save && topic = Topic.find_by_id(params[:id])
-                current_user.comments << comment
-                topic.comments << comment
-                redirect "/toast-it/topics/#{topic.id}"
+              comment = Comment.find_by_id(params[:id])
+              if comment && comment.user == current_user && comment.update(params[:comment])
+                redirect "/toast-it/topics/#{comment.topic.id}"
               else
-                status 404
+                status 400
               end
             else
               session[:redir] = request.path_info
+              redirect '/login'
+            end
+          end
+
+          app.delete '/toast-it/comments/:id/delete' do
+            if logged_in?
+              comment = Comment.find_by_id(params[:id])
+              if comment && comment.user == current_user
+                redir = comment.topic.id
+                comment.destroy
+                redirect "/toast-it/topics/#{redir}"
+              else
+                status 400
+              end
+            else
+              session[:redir] = "toast-it/topics/#{params[:id]}"
               redirect '/login'
             end
           end
