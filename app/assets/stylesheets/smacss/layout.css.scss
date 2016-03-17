@@ -2,6 +2,10 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  .inline-block {
+    display: inline-block;
+    vertical-align: top;
+  }
   main {
     flex: 1 0 auto;
     input {
@@ -28,6 +32,7 @@ body {
         padding-left: 10px;
         ul.vote {
           max-width: 31px;
+          margin-right: 5px;
           button {
             padding: 0 6px;
             &.btn-flat:focus {
@@ -35,50 +40,23 @@ body {
             }
           }
         }
-        .chip {
-          white-space: nowrap;
-        }
-        p.topic-metadata {
-          color: rgba(0, 0, 0, 0.6);
-        }
         i.circle {
           background-color: #999;
           color: white;
           padding: 10px;
-          margin: 0 5px;
+          margin-top: 25px;
+          max-width: 50px;
+        }
+        ul.topic-info {
+          margin-left: 5px;
+          .chip {
+            white-space: nowrap;
+          }
+          p.topic-metadata {
+            color: rgba(0, 0, 0, 0.6);
+          }
         }
       }
-      // .row {
-      //   &.valign-wrapper {
-      //     margin-bottom: 0;
-      //     h5 {
-      //       margin-top: 0;
-      //     }
-      //     h6.topic-metadata {
-      //       color: rgba(0, 0, 0, 0.6);
-      //       padding-bottom: 5px;
-      //       border-bottom: 1px solid #e0e0e0;
-      //     }
-      //     .title {
-      //       padding-right: 5px;
-      //     }
-      //     .vote {
-      //       font-size: 1.5em;
-      //       button {
-      //         padding: 0 1rem;
-      //         &.btn-flat:focus {
-      //           background-color: transparent;
-      //         }
-      //       }
-      //     }
-      //     .chip {
-      //       white-space: nowrap;
-      //     }
-      //     .score {
-      //       padding: 0 1rem;
-      //     }
-      //   }
-      // }
     }
   }
 }

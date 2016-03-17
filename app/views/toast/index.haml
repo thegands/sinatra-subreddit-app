@@ -50,8 +50,8 @@
     %ul.topic.collection.z-depth-1
       - @topics.each do |topic|
         - liked = topic.liked?(@user) if @user
-        %li.collection-item.valign-wrapper
-          %ul.vote.center-align.valign
+        %li.collection-item
+          %ul.vote.center-align.inline-block
             %li<
               %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
                 - if liked
@@ -70,10 +70,10 @@
                   %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
                     %i.fa.fa-beer.fa-flip-vertical
           - if topic.link_topic
-            %i.material-icons.small.circle.valign link
+            %i.material-icons.small.circle link
           - else
-            %i.material-icons.small.circle.valign insert_comment
-          %ul.valign
+            %i.material-icons.small.circle insert_comment
+          %ul.inline-block.topic-info
             %li<
               %h5<
                 - if topic.link_topic
