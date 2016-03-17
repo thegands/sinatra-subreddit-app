@@ -13,12 +13,12 @@
     - if @user
       %ul.dropdown-content#account
         %li<
-          %a{href: '#'} Account
+          %a{href: "/users/#{@user.name}"} Account
         %li<
           %a{href: '/logout'} Logout
       %ul.dropdown-content#mobile_account
         %li<
-          %a{href: '#'} Account
+          %a{href: "/users/#{@user.name}"} Account
         %li<
           %a{href: '/logout'} Logout
     %nav
