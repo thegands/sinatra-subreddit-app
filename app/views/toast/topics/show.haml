@@ -24,7 +24,10 @@
         %ul.valign.topic
           %li
             %h5<
-              %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
+              - if @topic.link_topic
+                %a.title{href: @topic.content} #{@topic.title}
+              - else
+                %a.title{href: "/toast-it/topics/#{@topic.id}"} #{@topic.title}
           %li
             %p.topic-metadata<
               %a.chip{href: '#comments'}> #{@topic.comments.count} comments
@@ -34,7 +37,8 @@
               - else
                 %span.grey-text<>
                   &= "<deleted>"
-      %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
+      - if !@topic.link_topic
+        %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}

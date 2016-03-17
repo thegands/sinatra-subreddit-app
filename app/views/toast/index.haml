@@ -34,11 +34,17 @@
               - else
                 %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
                   %i.fa.fa-beer.fa-flip-vertical
-        %i.material-icons.small.circle.valign insert_comment
+        - if topic.link_topic
+          %i.material-icons.small.circle.valign link
+        - else
+          %i.material-icons.small.circle.valign insert_comment
         %ul.valign
           %li<
             %h5<
-              %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
+              - if topic.link_topic
+                %a.title{href: topic.content} #{topic.title}
+              - else
+                %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
           %li<
             %p.topic-metadata<
               %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
