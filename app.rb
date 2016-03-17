@@ -35,6 +35,10 @@ class Web < Sinatra::Base
     haml :'404'
   end
 
+  error 400 do
+    haml :'400'
+  end
+
   error do
     haml :'500'
   end
