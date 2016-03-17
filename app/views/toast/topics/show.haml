@@ -75,7 +75,7 @@
                       %i.fa.fa-beer
               %li.score< #{comment.score}
               %li<
-                %form{action: "/toast-it/topics/#{comment.id}/toast", method: 'post'}
+                %form{action: "/toast-it/comments/#{comment.id}/toast", method: 'post'}
                   - if liked == false
                     %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
                       %i.fa.fa-beer.fa-flip-vertical
