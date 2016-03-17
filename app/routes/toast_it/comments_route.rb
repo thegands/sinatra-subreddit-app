@@ -8,11 +8,10 @@ module Sinatra
             @topic = Topic.find_by_id(params[:id])
             if @topic
               if logged_in?
-                # binding.pry
                 @user = current_user
                 @liked = @topic.liked?(@user)
+                haml :'toast/topics/show'
               end
-              haml :'toast/topics/show'
             else
               "Requested topic not found"
             end
@@ -21,7 +20,7 @@ module Sinatra
           app.post '/toast-it/comments/:id' do
             if logged_in?
               comment = Comment.new(params[:comment])
-              if comment.save && topic = Topic.find(params[:id])
+              if comment.save && topic = Topic.find_by_id(params[:id])
                 current_user.comments << comment
                 topic.comments << comment
                 redirect "/toast-it/topics/#{topic.id}"
