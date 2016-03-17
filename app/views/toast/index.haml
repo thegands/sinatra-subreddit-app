@@ -1,89 +1,93 @@
--# Create a Topic Fixed Menu
-.fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
-  %a.btn-floating.btn-large.indigo<
-    %i.large.mdi-navigation-menu
-  %ul
-    %li<
-      %a.btn-floating.blue.modal-trigger{href: '#new_link'}<
-        %i.material-icons link
-    %li<
-      %a.btn-floating.red.modal-trigger{href: '#new'}<
-        %i.large.material-icons mode_edit
+- if logged_in?
+  -# Create a Topic Fixed Menu
+  .fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
+    %a.btn-floating.btn-large.indigo<
+      %i.large.mdi-navigation-menu
+    %ul
+      %li<
+        %a.btn-floating.blue.modal-trigger{href: '#new_link'}<
+          %i.material-icons link
+      %li<
+        %a.btn-floating.red.modal-trigger{href: '#new'}<
+          %i.large.material-icons mode_edit
 
-.modal#new
-  %form{action: '/toast-it/topics', method: 'post'}
-    .modal-content
-      .row
-        %h4.col.s12 Create a new text topic
-      .row
-        .input-field.col.s12
-          %input.validate#title{type: 'text', name: 'title', required: true}
-          %label{for: 'title'} Topic Title
-        .input-field.col.s12
-          %textarea.materialize-textarea#content{name: 'content', required: true}
-          %label{for: 'content'} Topic Contents
-    .modal-footer
-      %button.btn.waves-effect.waves-light{type: 'submit'}
-        Create Text Topic
-        %i.material-icons.right send
-.modal#new_link
-  %form{action: '/toast-it/topics', method: 'post'}
-    .modal-content
-      .row
-        %h4.col.s12 Create a new link topic
-      .row
-        .input-field.col.s12
-          %input.validate#title{type: 'text', name: 'title', required: true}
-          %label{for: 'title'} Topic Title
-        .input-field.col.s12
-          %input.validate#content{type: 'url', name: 'content', required: true}
-          %label{for: 'content'} Topic URL
-    .modal-footer
-      %button.btn.waves-effect.waves-light{type: 'submit', name: 'link_topic', value: 'true'}
-        Create Link Topic
-        %i.material-icons.right send
+  .modal#new
+    %form{action: '/toast-it/topics', method: 'post'}
+      .modal-content
+        .row
+          %h4.col.s12 Create a new text topic
+        .row
+          .input-field.col.s12
+            %input.validate#title{type: 'text', name: 'title', required: true, autofocus: true}
+            %label{for: 'title'} Topic Title
+          .input-field.col.s12
+            %textarea.materialize-textarea#content{name: 'content', required: true}
+            %label{for: 'content'} Topic Contents
+      .modal-footer
+        %button.btn.waves-effect.waves-light{type: 'submit'}
+          Create Text Topic
+          %i.material-icons.right send
+  .modal#new_link
+    %form{action: '/toast-it/topics', method: 'post'}
+      .modal-content
+        .row
+          %h4.col.s12 Create a new link topic
+        .row
+          .input-field.col.s12
+            %input.validate#title{type: 'text', name: 'title', required: true, autofocus: true}
+            %label{for: 'title'} Topic Title
+          .input-field.col.s12
+            %input.validate#content{type: 'url', name: 'content', required: true}
+            %label{for: 'content'} Topic URL
+      .modal-footer
+        %button.btn.waves-effect.waves-light{type: 'submit', name: 'link_topic', value: 'true'}
+          Create Link Topic
+          %i.material-icons.right send
 
 -# Topic List
 %main.container
-  %ul.topic.collection.z-depth-1
-    - @topics.each do |topic|
-      - liked = topic.liked?(@user) if @user
-      %li.collection-item.valign-wrapper
-        %ul.vote.center-align.valign
-          %li<
-            %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
-              - if liked
-                %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
-                  %i.fa.fa-beer
-              - else
-                %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
-                  %i.fa.fa-beer
-          %li.score< #{topic.score}
-          %li<
-            %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
-              - if liked == false
-                %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
-                  %i.fa.fa-beer.fa-flip-vertical
-              - else
-                %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
-                  %i.fa.fa-beer.fa-flip-vertical
-        - if topic.link_topic
-          %i.material-icons.small.circle.valign link
-        - else
-          %i.material-icons.small.circle.valign insert_comment
-        %ul.valign
-          %li<
-            %h5<
-              - if topic.link_topic
-                %a.title{href: topic.content} #{topic.title}
-              - else
-                %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
-          %li<
-            %p.topic-metadata<
-              %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
-              &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
-              - if topic.user
-                %a{href: "/users/#{topic.user.name}"}> #{topic.user.name}
-              - else
-                %span.grey-text<>
-                  &= "<deleted>"
+  .row
+    %ul.topic.collection.z-depth-1
+      - @topics.each do |topic|
+        - liked = topic.liked?(@user) if @user
+        %li.collection-item.valign-wrapper
+          %ul.vote.center-align.valign
+            %li<
+              %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
+                - if liked
+                  %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
+                    %i.fa.fa-beer
+                - else
+                  %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
+                    %i.fa.fa-beer
+            %li.score< #{topic.score}
+            %li<
+              %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
+                - if liked == false
+                  %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
+                    %i.fa.fa-beer.fa-flip-vertical
+                - else
+                  %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
+                    %i.fa.fa-beer.fa-flip-vertical
+          - if topic.link_topic
+            %i.material-icons.small.circle.valign link
+          - else
+            %i.material-icons.small.circle.valign insert_comment
+          %ul.valign
+            %li<
+              %h5<
+                - if topic.link_topic
+                  %a.title{href: topic.content} #{topic.title}
+                - else
+                  %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
+            %li<
+              %p.topic-metadata<
+                %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
+                &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
+                - if topic.user
+                  %a{href: "/users/#{topic.user.name}"}> #{topic.user.name}
+                - else
+                  %span.grey-text<>
+                    &= "<deleted>"
+  .row
+    %a.waves-effect.waves-light.btn.left{href: '/toast-it/topics/new'} Create a new topic
