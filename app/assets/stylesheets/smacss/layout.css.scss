@@ -2,10 +2,6 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  .inline-block {
-    display: inline-block;
-    vertical-align: top;
-  }
   main {
     flex: 1 0 auto;
     input {
@@ -26,6 +22,21 @@ body {
         }
       }
     }
+    .inline-block {
+      display: inline-block;
+      vertical-align: top;
+    }
+    button.btn-flat:focus {
+      background-color: transparent;
+    }
+    .slim, .vote {
+      button, a.btn {
+        padding: 0 6px;
+      }
+    }
+    .slim a.waves-light {
+      margin: 0 5px;
+    }
     .topic.collection, #comments.collection {
       .collection-item {
         padding-right: 10px;
@@ -33,12 +44,6 @@ body {
         ul.vote {
           max-width: 31px;
           margin-right: 5px;
-          button {
-            padding: 0 6px;
-            &.btn-flat:focus {
-              background-color: transparent;
-            }
-          }
         }
         i.circle {
           background-color: #999;

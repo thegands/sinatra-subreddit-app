@@ -41,11 +41,14 @@
         %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
       - if @topic.user == @user
         %li.collection-item
-          %form{action: "/toast-it/topics/#{@topic.id}/delete", method: 'post'}
+          %form{action: "/toast-it/topics/#{@topic.id}/delete", method: 'post', onsubmit: "return confirm('Do you really want to delete this topic?')"}
             %input#hidden{type: 'hidden', name: '_method', value: 'delete'}
             %a.waves-effect.waves-light.btn{href: "/toast-it/topics/#{@topic.id}/edit"}
-              Edit your topic
-            %button.btn-flat.waves-effect.waves-orange{type: 'submit'} Delete your topic
+              %i.material-icons.right edit
+              Edit topic
+            %button.btn-flat.waves-effect.waves-orange.right{type: 'submit'}
+              %i.material-icons.right delete
+              Delete topic
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}
@@ -92,10 +95,20 @@
             %ul.inline-block.post-info
               %li<
                 %p.post-metadata<
-                  Submitted #{comment.created_to_s} ago by&nbsp;
-                  - if comment.user
+                  - if comment.user && comment.user == @user
+                    %form.slim{action: "/toast-it/comments/#{comment.id}/delete", method: 'post', onsubmit: "return confirm('Do you really want to delete this comment?')"}
+                      %input#hidden{type: 'hidden', name: '_method', value: 'delete'}
+                      Submitted #{comment.created_to_s} ago by&nbsp;
+                      %a{href: "/users/#{comment.user.name}"}> #{comment.user.name}
+                      %a.waves-effect.waves-light.btn{href: "/toast-it/comments/#{comment.id}/edit"}
+                        %i.material-icons edit
+                      %button.btn-flat.waves-effect.waves-orange.right{type: 'submit'}
+                        %i.material-icons delete
+                  - elsif comment.user
+                    Submitted #{comment.created_to_s} ago by&nbsp;
                     %a{href: "/users/#{comment.user.name}"}> #{comment.user.name}
                   - else
+                    Submitted #{comment.created_to_s} ago by&nbsp;
                     %span.grey-text<>
                       &= "<deleted>"
               %li<
