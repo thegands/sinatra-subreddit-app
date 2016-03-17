@@ -38,13 +38,17 @@ module Sinatra
           end
 
           app.get '/toast-it/topics/:id' do
-            @topic = Topic.find(params[:id])
-            if logged_in?
-              # binding.pry
-              @user = current_user
-              @liked = @topic.liked?(@user)
+            @topic = Topic.find_by_id(params[:id])
+            if @topic
+              if logged_in?
+                # binding.pry
+                @user = current_user
+                @liked = @topic.liked?(@user)
+              end
+              haml :'toast/topics/show'
+            else
+              "Requested topic not found"
             end
-            haml :'toast/topics/show'
           end
 
           app.post '/toast-it/topics/:id' do
