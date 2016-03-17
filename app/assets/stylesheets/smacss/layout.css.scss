@@ -37,6 +37,11 @@ body {
     .slim a.waves-light {
       margin: 0 5px;
     }
+    .user.collection {
+      form {
+        display: inline-block;
+      }
+    }
     .topic.collection, #comments.collection {
       .collection-item {
         padding-right: 10px;

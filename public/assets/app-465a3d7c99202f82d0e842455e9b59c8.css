@@ -14313,16 +14313,20 @@ body main .slim a.waves-light {
   margin: 0 5px;
 }
 /* line 41, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+body main .user.collection form {
+  display: inline-block;
+}
+/* line 46, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item, body main #comments.collection .collection-item {
   padding-right: 10px;
   padding-left: 10px;
 }
-/* line 44, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 49, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.vote, body main #comments.collection .collection-item ul.vote {
   max-width: 31px;
   margin-right: 5px;
 }
-/* line 48, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 53, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item i.circle, body main #comments.collection .collection-item i.circle {
   background-color: #999;
   color: white;
@@ -14330,15 +14334,15 @@ body main .topic.collection .collection-item i.circle, body main #comments.colle
   margin-top: 25px;
   max-width: 50px;
 }
-/* line 55, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 60, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.post-info, body main #comments.collection .collection-item ul.post-info {
   margin-left: 5px;
 }
-/* line 57, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 62, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.post-info .chip, body main #comments.collection .collection-item ul.post-info .chip {
   white-space: nowrap;
 }
-/* line 60, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
+/* line 65, /home/thegands/code/toast-it/app/assets/stylesheets/smacss/layout.css.scss */
 body main .topic.collection .collection-item ul.post-info p.post-metadata, body main #comments.collection .collection-item ul.post-info p.post-metadata {
   color: rgba(0, 0, 0, 0.6);
 }

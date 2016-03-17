@@ -46,7 +46,7 @@
             %a.waves-effect.waves-light.btn{href: "/toast-it/topics/#{@topic.id}/edit"}
               %i.material-icons.right edit
               Edit topic
-            %button.btn-flat.waves-effect.waves-orange.right{type: 'submit'}
+            %button.btn-flat.waves-effect.waves-red.right{type: 'submit'}
               %i.material-icons.right delete
               Delete topic
     -# Topic Reply
@@ -102,7 +102,7 @@
                       %a{href: "/users/#{comment.user.name}"}> #{comment.user.name}
                       %a.waves-effect.waves-light.btn{href: "/toast-it/comments/#{comment.id}/edit"}
                         %i.material-icons edit
-                      %button.btn-flat.waves-effect.waves-orange.right{type: 'submit'}
+                      %button.btn-flat.waves-effect.waves-red.right{type: 'submit'}
                         %i.material-icons delete
                   - elsif comment.user
                     Submitted #{comment.created_to_s} ago by&nbsp;

@@ -30,7 +30,7 @@ module Sinatra
 
           app.post '/toast-it/topics' do
             if logged_in?
-              topic = Topic.new(params)
+              topic = Topic.new(params[:topic])
               if topic.save
                 current_user.topics << topic
                 redirect "/toast-it/topics/#{topic.id}"
@@ -112,7 +112,7 @@ module Sinatra
                 status 404
               end
             else
-              session[:redir] = "toast-it/topics/#{params[:id]}"
+              session[:redir] = "/toast-it/topics/#{params[:id]}"
               redirect '/login'
             end
           end

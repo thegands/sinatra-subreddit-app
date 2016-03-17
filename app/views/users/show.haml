@@ -1,54 +1,25 @@
-- if logged_in?
-  -# Create a Topic Fixed Menu
-  .fixed-action-btn.click-to-toggle{style: 'bottom: 50px; right: 24px;'}
-    %a.btn-floating.btn-large.indigo<
-      %i.large.mdi-navigation-menu
-    %ul
-      %li<
-        %a.btn-floating.blue.modal-trigger{href: '#new_link'}<
-          %i.material-icons link
-      %li<
-        %a.btn-floating.red.modal-trigger{href: '#new'}<
-          %i.large.material-icons message
-
-  .modal#new
-    %form{action: '/toast-it/topics', method: 'post'}
-      .modal-content
-        .row
-          %h4.col.s12 Create a new text topic
-        .row
-          .input-field.col.s12
-            %input.validate#title{type: 'text', name: 'topic[title]', required: true, autofocus: true}
-            %label{for: 'title'} Topic Title
-          .input-field.col.s12
-            %textarea.materialize-textarea#content{name: 'topic[content]', required: true}
-            %label{for: 'content'} Topic Contents
-      .modal-footer
-        %button.btn.waves-effect.waves-light{type: 'submit'}
-          Create Text Topic
-          %i.material-icons.right send
-  .modal#new_link
-    %form{action: '/toast-it/topics', method: 'post'}
-      .modal-content
-        .row
-          %h4.col.s12 Create a new link topic
-        .row
-          .input-field.col.s12
-            %input.validate#title{type: 'text', name: 'topic[title]', required: true, autofocus: true}
-            %label{for: 'title'} Topic Title
-          .input-field.col.s12
-            %input.validate#content{type: 'url', name: 'topic[content]', required: true}
-            %label{for: 'content'} Topic URL
-      .modal-footer
-        %button.btn.waves-effect.waves-light{type: 'submit', name: 'topic[link_topic]', value: 'true'}
-          Create Link Topic
-          %i.material-icons.right send
-
 -# Topic List
 %main.container
   .row
+    %ul.user.collection.z-depth-1
+      %li.collection-item
+        %h1 #{@view_user.name}
+        %p Toasting for #{@view_user.created_to_s} with #{@view_user.topics.count} topics and #{@view_user.comments.count} comments.
+      - if @user == @view_user
+        %li.collection-item
+          %form{action: "/users/#{@user.name}/delete", method: 'post', onsubmit: "return confirm('Do you really want to delete your account?')"}
+            %input#hidden{type: 'hidden', name: '_method', value: 'delete'}
+            %button.btn.waves-effect.waves-red.red{type: 'submit'}
+              %i.material-icons.right delete
+              Delete account
+          %form.right{action: "/users/#{@user.name}/delete/all", method: 'post', onsubmit: "return confirm('Do you really want to all your account along with all your topics and comments?')"}
+            %input#hidden{type: 'hidden', name: '_method', value: 'delete'}
+            %button.btn-flat.waves-effect.waves-red{type: 'submit'}
+              %i.material-icons.right delete
+              Purge and delete account
+  .row
     %ul.topic.collection.z-depth-1
-      - @topics.each do |topic|
+      - @view_user.topics.each do |topic|
         - liked = topic.liked?(@user) if @user
         %li.collection-item
           %ul.vote.center-align.inline-block
@@ -89,5 +60,3 @@
                 - else
                   %span.grey-text<>
                     &= "<deleted>"
-  .row
-    %a.waves-effect.waves-light.btn{href: '/toast-it/topics/new'} Create a new topic
