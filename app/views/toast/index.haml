@@ -9,7 +9,7 @@
           %i.material-icons link
       %li<
         %a.btn-floating.red.modal-trigger{href: '#new'}<
-          %i.large.material-icons mode_edit
+          %i.large.material-icons message
 
   .modal#new
     %form{action: '/toast-it/topics', method: 'post'}
@@ -72,7 +72,7 @@
           - if topic.link_topic
             %i.material-icons.small.circle link
           - else
-            %i.material-icons.small.circle insert_comment
+            %i.material-icons.small.circle message
           %ul.inline-block.post-info
             %li<
               %h5<
