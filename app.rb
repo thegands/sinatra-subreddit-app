@@ -18,7 +18,7 @@ class Web < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:id])
+      User.find_by_id(session[:id])
     end
 
     def url_redirect
@@ -28,11 +28,6 @@ class Web < Sinatra::Base
         redirect '/toast-it'
       end
     end
-  end
-
-  get '/' do
-    "Sinatra is up!"
-    #@user = User.find params[:id]
   end
 
   # Errors

@@ -10,8 +10,7 @@
     = stylesheet_tag 'app'
 
   %body.orange.lighten-5
-    - if logged_in?
-      - user = current_user
+    - if @user
       %ul.dropdown-content#account
         %li<
           %a{href: '#'} Account
@@ -51,9 +50,9 @@
                   %i.material-icons search
                 %i.material-icons close
           %li<
-            - if logged_in?
+            - if @user
               %a.dropdown-button{href: '#!', data: {activates: 'account'}}<
-                #{user.name}
+                #{@user.name}
                 %i.material-icons.right> arrow_drop_down
             - else
               %a{href: '/login'} Login
@@ -66,9 +65,9 @@
                   %i.material-icons search
                 %i.material-icons close
           %li<
-            - if logged_in?
+            - if @user
               %a.dropdown-button{href: '#!', data: {activates: 'mobile_account'}}<
-                #{user.name}
+                #{@user.name}
                 %i.material-icons.right> arrow_drop_down
             - else
               %a{href: '/login'} Login

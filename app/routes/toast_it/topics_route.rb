@@ -20,6 +20,7 @@ module Sinatra
 
           app.get '/toast-it/topics/new' do
             if logged_in?
+              @user = current_user
               haml :'toast/topics/new'
             else
               session[:redir] = request.path_info
@@ -75,10 +76,10 @@ module Sinatra
           app.get '/toast-it/topics/:id/edit' do
             if logged_in?
               @topic = Topic.find_by_id(params[:id])
-              user = current_user
-              if @topic && @topic.user == user
+              @user = current_user
+              if @topic && @topic.user == @user
                 # binding.pry
-                @liked = @topic.liked?(user)
+                @liked = @topic.liked?(@user)
                 haml :'toast/topics/edit'
               end
             else
@@ -115,21 +116,6 @@ module Sinatra
               redirect '/login'
             end
           end
-
-          # app.delete '/toast-it/topics/:id/delete' do
-          #   if logged_in?
-          #     topic = Topic.find_by_id(params[:id])
-          #     if topic.user == current_user && topic.destroy)
-          #       redirect "/toast-it"
-          #     else
-          #       "error"
-          #     end
-          #   else
-          #     binding.pry
-          #     session[:redir] = request.path_info
-          #     redirect '/login'
-          #   end
-          # end
 
         end
       end
