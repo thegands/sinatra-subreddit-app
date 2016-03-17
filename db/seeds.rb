@@ -5,21 +5,27 @@ admin = User.find_by(name: 'admin')
 fourchan = User.find_by(name: '4changuy')
 wiseone = User.find_by(name: 'wiseone')
 
-cats = Topic.find_or_create_by(title: 'Moar Cat Pics!', content: 'Haha madejalook')
-shark = Topic.find_or_create_by(title: 'Man gets eaten by Shark', content: 'A man got bitten on the foot by a small shark. It was treated with a bandaid. The man is currently recovering.')
-denver = Topic.find_or_create_by(title: 'Denver Sunrise', content: 'Check out this picture of the mile high city sunrise! http://pictureandstuff.com/sunrise.jpg')
+cats = Topic.find_or_create_by(title: 'Moar Cat Pics!', content: 'these are great https://http.cat/')
+swartz = Topic.find_or_create_by(title: 'The Story of Aaron Swartz', content: 'https://www.youtube.com/watch?v=vXr-2hwTk58', link_topic: true)
+books = Topic.find_or_create_by(title: 'Best Ruby Resources', content: 'Share your favorite Ruby resources here! My goto list is: https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#ruby')
+link_example = Topic.find_or_create_by(title: 'Topics can link directly!', content: 'http://codepen.io/thegands/pen/ZWpOwd', link_topic: true)
+cats.update(created_at: Time.now - 60*60*24*5)
+swartz.update(created_at: Time.now - 60*60*15)
+books.update(created_at: Time.now - 60*60*1)
+link_example.update(created_at: Time.now - 60*39)
 
 meme = Comment.find_or_create_by(content: 'Haha! memes and stuff', user_id: fourchan.id)
-aww = Comment.find_or_create_by(content: 'poor man. hope he makes a full recovery!', user_id: admin.id)
 love = Comment.find_or_create_by(content: 'love it!', user_id: wiseone.id)
+neato = Comment.find_or_create_by(content: '### W^oW!!', user_id: admin.id)
 
-admin.topics << denver
+admin.topics << books
+admin.topics << link_example
 fourchan.topics << cats
-wiseone.topics << shark
+wiseone.topics << swartz
 
 cats.comments << meme
-shark.comments << aww
-denver.comments << love
+books.comments << love
+link_example.comments << neato
 
 
 
