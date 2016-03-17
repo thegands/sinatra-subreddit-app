@@ -15,12 +15,12 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def self.top_topics
-    self.all.sort { |a,b| b.score <=> a.score }
+  def self.new_topics
+    self.order(id: :desc)
   end
 
-  def self.new_topics
-    self.all.reverse
+  def self.top_topics
+    self.new_topics.sort_by { |a| [a.score, a.id] }.reverse
   end
 
 
