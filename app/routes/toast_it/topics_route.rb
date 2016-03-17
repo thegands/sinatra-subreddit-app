@@ -89,7 +89,7 @@ module Sinatra
           app.put '/toast-it/topics/:id/edit' do
             if logged_in?
               topic = Topic.find_by_id(params[:id])
-              if topic.user == current_user && topic.update(params[:topic])
+              if topic && topic.user == current_user && topic.update(params[:topic])
                 redirect "/toast-it/topics/#{topic.id}"
               else
                 "error"
@@ -99,6 +99,37 @@ module Sinatra
               redirect '/login'
             end
           end
+
+          app.delete '/toast-it/topics/:id/delete' do
+            if logged_in?
+              topic = Topic.find_by_id(params[:id])
+              if topic && topic.user == current_user
+                topic.comments.destroy_all
+                topic.destroy
+                redirect '/toast-it'
+              else
+                "error"
+              end
+            else
+              session[:redir] = "toast-it/topics/#{params[:id]}"
+              redirect '/login'
+            end
+          end
+
+          # app.delete '/toast-it/topics/:id/delete' do
+          #   if logged_in?
+          #     topic = Topic.find_by_id(params[:id])
+          #     if topic.user == current_user && topic.destroy)
+          #       redirect "/toast-it"
+          #     else
+          #       "error"
+          #     end
+          #   else
+          #     binding.pry
+          #     session[:redir] = request.path_info
+          #     redirect '/login'
+          #   end
+          # end
 
         end
       end

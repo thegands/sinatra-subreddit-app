@@ -41,7 +41,11 @@
         %li.collection-item #{RDiscount.new(@topic.content, :smart, :autolink, :filter_html).to_html}
       - if @topic.user == @user
         %li.collection-item
-          %a.waves-effect.waves-light.btn{href: "/toast-it/topics/#{@topic.id}/edit"} Edit your topic
+          %form{action: "/toast-it/topics/#{@topic.id}/delete", method: 'post'}
+            %input#hidden{type: 'hidden', name: '_method', value: 'delete'}
+            %a.waves-effect.waves-light.btn{href: "/toast-it/topics/#{@topic.id}/edit"}
+              Edit your topic
+            %button.btn-flat.waves-effect.waves-orange{type: 'submit'} Delete your topic
     -# Topic Reply
     - if logged_in?
       %ul.topic.collapsible.indigo-text.text-accent-4#reply{data: {collapsible: 'accordion'}}

@@ -9,29 +9,31 @@
         - if @topic.link_topic
           .col.s12#link
             .row
-              %form.col.s12{action: "/toast-it/topics/#{@topic.id}/edit", method: 'put'}
+              %form.col.s12{action: "/toast-it/topics/#{@topic.id}/edit", method: 'post'}
+                %input#hidden{type: 'hidden', name: '_method', value: 'put'}
                 .row
                   .input-field.col.s12
-                    %input.validate#title{type: 'text', name: 'title', required: true, value: @topic.title}
+                    %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: @topic.title}
                     %label{for: 'title'} Topic Title
                   .input-field.col.s12
-                    %input.validate#content{type: 'url', name: 'content', required: true, value: @topic.content}
+                    %input.validate#content{type: 'url', name: 'topic[content]', required: true, value: @topic.content}
                     %label{for: 'content'} Topic URL
                 .row
                   .col.s12
-                    %button.btn.waves-effect.waves-light.right{type: 'submit', name: 'link_topic', value: 'true'}
+                    %button.btn.waves-effect.waves-light.right{type: 'submit', name: 'topic[link_topic]', value: 'true'}
                       Edit Link Topic
                       %i.material-icons.right send
         - else
           .col.s12
             .row
-              %form.col.s12{action: "/toast-it/topics/#{@topic.id}/edit", method: 'put'}
+              %form.col.s12{action: "/toast-it/topics/#{@topic.id}/edit", method: 'post'}
+                %input#hidden{type: 'hidden', name: '_method', value: 'put'}
                 .row
                   .input-field.col.s12
-                    %input.validate#title{type: 'text', name: 'title', required: true, value: @topic.title}
+                    %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: @topic.title}
                     %label{for: 'title'} Topic Title
                   .input-field.col.s12
-                    %textarea.materialize-textarea#content{name: 'content', required: true} #{@topic.content}
+                    %textarea.materialize-textarea#content{name: 'topic[content]', required: true} #{@topic.content}
                     %label{for: 'content'} Topic Contents
                 .row
                   .col.s12
