@@ -4,6 +4,7 @@
   "dependencies": {
     "jquery": "~2.0",
     "materialize": "~0.97.5",
-    "font-awesome": "~4.0"
+    "font-awesome": "~4.0",
+    "openwebicons": "~1.4.0"
   }
 }
