@@ -19,6 +19,7 @@ module Sinatra
           end
 
           app.get '/toast-it/topics/new' do
+            p session[:params].inspect
             if logged_in?
               @user = current_user
               haml :'toast/topics/new'
@@ -32,10 +33,15 @@ module Sinatra
             if logged_in?
               topic = Topic.new(params[:topic])
               if topic.save
+                session.delete(:params)
                 current_user.topics << topic
                 redirect "/toast-it/topics/#{topic.id}"
               else
-                status 404
+                session[:params] = {}
+                params[:topic].each do |k,v|
+                  session[:params][k.to_sym] = v
+                end
+                redirect '/toast-it/topics/new'
               end
             else
               session[:redir] = request.path_info

@@ -7,18 +7,22 @@
           %ul.tabs
             %li.tab.col.s6
               %a{href: '#text'} Text Topic
-            %li.tab.col.s6
-              %a{href: '#link'} Link Topic
+            - if session[:params][:link_topic]
+              %li.tab.col.s6
+                %a.active{href: '#link'} Link Topic
+            - else
+              %li.tab.col.s6
+                %a{href: '#link'} Link Topic
         .col.s12#text
           .row
           .row
             %form.col.s12{action: '/toast-it/topics', method: 'post'}
               .row
                 .input-field.col.s12
-                  %input.validate#title{type: 'text', name: 'topic[title]', required: true}
+                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params][:title]}
                   %label{for: 'title'} Topic Title
                 .input-field.col.s12
-                  %textarea.materialize-textarea#content{name: 'topic[content]', required: true}
+                  %textarea.materialize-textarea#content{name: 'topic[content]', required: true, value: session[:params][:content]}
                   %label{for: 'content'} Topic Contents
               .row
                 .col.s12
@@ -31,13 +35,15 @@
             %form.col.s12{action: '/toast-it/topics', method: 'post'}
               .row
                 .input-field.col.s12
-                  %input.validate#title{type: 'text', name: 'topic[title]', required: true}
+                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params][:title]}
                   %label{for: 'title'} Topic Title
                 .input-field.col.s12
-                  %input.validate#content{type: 'url', name: 'topic[content]', required: true}
+                  %input.validate#content{type: 'url', name: 'topic[content]', required: true, value: session[:params][:content]}
                   %label{for: 'content'} Topic URL
               .row
                 .col.s12
                   %button.btn.waves-effect.waves-light.right{type: 'submit', name: 'topic[link_topic]', value: 'true'}
                     Create Link Topic
                     %i.material-icons.right send
+        - if session[:params]
+          %h6.red-text All submitted topics must include a title and content.
