@@ -6,8 +6,8 @@ class Topic < ActiveRecord::Base
 
   validates :content, :title, presence: true
 
-  include EvalScore
   include CreatedToS
+  include Vote
 
   def self.new_topics
     self.order(id: :desc)
