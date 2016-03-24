@@ -53,7 +53,6 @@ module Sinatra
             @topic = Topic.find_by_id(params[:id])
             if @topic
               if logged_in?
-                # binding.pry
                 @user = current_user
                 @liked = @topic.liked?(@user)
               end
@@ -84,7 +83,6 @@ module Sinatra
               @topic = Topic.find_by_id(params[:id])
               @user = current_user
               if @topic && @topic.user == @user
-                # binding.pry
                 @liked = @topic.liked?(@user)
                 haml :'toast/topics/edit'
               end

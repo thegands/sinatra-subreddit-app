@@ -6,7 +6,6 @@ module Sinatra
 
           app.post '/toast-it/topics/:id/toast' do
             if logged_in?
-              # binding.pry
               score = Score.new(liked: params[:liked])
               if (topic = Topic.find_by_id(params[:id])) && current_user
                 if topic.scores << score && current_user.scores << score
@@ -38,7 +37,6 @@ module Sinatra
 
           app.post '/toast-it/comments/:id/toast' do
             if logged_in?
-              # binding.pry
               score = Score.new(liked: params[:liked])
               if (comment = Comment.find_by_id(params[:id])) && current_user
                 if comment.scores << score && current_user.scores << score
