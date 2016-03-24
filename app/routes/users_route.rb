@@ -85,6 +85,7 @@ module Sinatra
               user = current_user
               delete_user = User.find_by(name: params[:name])
               if user && delete_user == user
+                user.scores.destroy_all
                 user.destroy
                 session.clear
                 redirect '/'
@@ -102,6 +103,7 @@ module Sinatra
               user = current_user
               delete_user = User.find_by(name: params[:name])
               if user && delete_user == user
+                user.scores.destroy_all
                 user.comments.destroy_all
                 user.topics.destroy_all
                 user.destroy
