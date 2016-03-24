@@ -17,46 +17,47 @@
             %button.btn-flat.waves-effect.waves-red{type: 'submit'}
               %i.material-icons.right delete
               Purge and delete account
-  .row
-    %ul.topic.collection.z-depth-1
-      - @view_user.topics.each do |topic|
-        - liked = topic.liked?(@user) if @user
-        %li.collection-item
-          %ul.vote.center-align.inline-block
-            %li<
-              %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
-                - if liked
-                  %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
-                    %i.fa.fa-beer
-                - else
-                  %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
-                    %i.fa.fa-beer
-            %li.score< #{topic.score}
-            %li<
-              %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
-                - if liked == false
-                  %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
-                    %i.fa.fa-beer.fa-flip-vertical
-                - else
-                  %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
-                    %i.fa.fa-beer.fa-flip-vertical
-          - if topic.link_topic
-            %i.material-icons.small.circle link
-          - else
-            %i.material-icons.small.circle message
-          %ul.inline-block.post-info
-            %li<
-              %h5<
-                - if topic.link_topic
-                  %a.title{href: topic.content} #{topic.title}
-                - else
-                  %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
-            %li<
-              %p.post-metadata<
-                %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
-                &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
-                - if topic.user
-                  %a{href: "/users/#{topic.user.name}"}> #{topic.user.name}
-                - else
-                  %span.grey-text<>
-                    &= "<deleted>"
+  - if !@view_user.topics.empty?
+    .row
+      %ul.topic.collection.z-depth-1
+        - @view_user.topics.each do |topic|
+          - liked = topic.liked?(@user) if @user
+          %li.collection-item
+            %ul.vote.center-align.inline-block
+              %li<
+                %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
+                  - if liked
+                    %button.waves-effect.waves-light.btn.green{type: 'submit', name: 'liked', value: 'true'}
+                      %i.fa.fa-beer
+                  - else
+                    %button.waves-effect.waves-green.btn-flat{type: 'submit', name: 'liked', value: 'true'}
+                      %i.fa.fa-beer
+              %li.score< #{topic.score}
+              %li<
+                %form{action: "/toast-it/topics/#{topic.id}/toast", method: 'post'}
+                  - if liked == false
+                    %button.waves-effect.waves-light.btn.materialize-red.lighten-2{type: 'submit', name: 'liked', value: 'false'}
+                      %i.fa.fa-beer.fa-flip-vertical
+                  - else
+                    %button.waves-effect.waves-red.btn-flat{type: 'submit', name: 'liked', value: 'false'}
+                      %i.fa.fa-beer.fa-flip-vertical
+            - if topic.link_topic
+              %i.material-icons.small.circle link
+            - else
+              %i.material-icons.small.circle message
+            %ul.inline-block.post-info
+              %li<
+                %h5<
+                  - if topic.link_topic
+                    %a.title{href: topic.content} #{topic.title}
+                  - else
+                    %a.title{href: "/toast-it/topics/#{topic.id}"} #{topic.title}
+              %li<
+                %p.post-metadata<
+                  %a.chip{href: "/toast-it/topics/#{topic.id}#comments"}> #{topic.comments.count} comments
+                  &nbsp;Submitted #{topic.created_to_s} ago by&nbsp;
+                  - if topic.user
+                    %a{href: "/users/#{topic.user.name}"}> #{topic.user.name}
+                  - else
+                    %span.grey-text<>
+                      &= "<deleted>"
