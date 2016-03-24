@@ -10,6 +10,8 @@
               .input-field.col.s12
                 - if session[:failed_name]
                   %input.validate#name{type: 'text', name: 'name', required: true, value: session[:failed_name]}
+                - elsif !locals.empty?
+                  %input.validate#name{type: 'text', name: 'name', required: true, autofocus: true, placeholder: message}
                 - else
                   %input.validate#name{type: 'text', name: 'name', required: true, autofocus: true}
                 %label{for: 'name'} Username
@@ -17,8 +19,10 @@
               .input-field.col.s12
                 - if locals.empty?
                   %input.validate#password{type: 'password', name: 'password', required: true}
-                - else
+                - elsif session[:failed_name]
                   %input.validate#password{type: 'password', name: 'password', required: true, placeholder: message, autofocus: true}
+                - else
+                  %input.validate#password{type: 'password', name: 'password', required: true}
                 %label{for: 'password'} Password
             .row
               .input-field.col.s12

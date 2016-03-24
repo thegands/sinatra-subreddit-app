@@ -16,18 +16,19 @@ module Sinatra
           app.post '/signup' do
             if params[:password].length > 7
               if params[:password] == params[:confirm_password]
-                if params[:name].match(/\A[A-Za-z0-9]+\z/) && params[:name].length < 15
+                if params[:name].match(/\A[A-Za-z0-9]+\z/) && (3..14).include?(params[:name].length)
                   user = User.new(name: params[:name], password: params[:password])
                   if user.save
                     session.delete(:failed_name)
                     session[:id] = user.id
                     url_redirect
                   else
-                    session[:failed_name] = params[:name]
+                    session.delete(:failed_name)
                     haml :'users/signup', locals: {message: "Registration invalid. Please try again"}
                   end
                 else
-                  haml :'users/signup', locals: {message: "Registration invalid. Please try again"}
+                  session.delete(:failed_name)
+                  haml :'users/signup', locals: {message: "Your username must contain only alphanumeric characters and be between 3 and 14 characters long"}
                 end
               else
                 session[:failed_name] = params[:name]
