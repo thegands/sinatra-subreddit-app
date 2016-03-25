@@ -12,6 +12,8 @@ module Slugify
 
     def find_by_slug(slug)
       self.all.find{ |instance| instance.slug == slug }
+      # SELECT * FROM users WHERE username = slug
+      self.where(:username => slug)
     end
 
   end

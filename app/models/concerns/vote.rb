@@ -10,7 +10,19 @@ module Vote
     end
   end
 
+  topic.vote_for(current_user, :down)
+  topic.vote_for(current_user, :up)
+
+
+  def vote_for(user, direction)
+    value = direction == :up ? 1 : -1
+  end
+
+
   def upvote(user)
+    vote_for(current_user, :up)
+  end
+
     if score = voted?(user)
       case score.liked
       when true

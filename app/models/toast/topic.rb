@@ -15,6 +15,7 @@ class Topic < ActiveRecord::Base
 
   def self.top_topics
     self.new_topics.sort_by { |a| [a.score, a.id] }.reverse
+    self.order("score DESC")
   end
 
 

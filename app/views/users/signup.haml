@@ -8,7 +8,8 @@
           %form{action: '/signup', method: 'post'}
             .row
               .input-field.col.s12
-                - if session[:failed_name]
+                - if @user && @user.errors[:name].any?
+                  @user.errors[:name][0]
                   %input.validate#name{type: 'text', name: 'name', required: true, value: session[:failed_name]}
                 - elsif !locals.empty?
                   %input.validate#name{type: 'text', name: 'name', required: true, autofocus: true, placeholder: message}

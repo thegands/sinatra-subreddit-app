@@ -18,8 +18,8 @@ class Web < Sinatra::Base
     end
 
     def current_user
-      User.find_by_id(session[:id])
-    end
+      @user ||= User.find_by_id(session[:id])
+    end # Memoize
 
     def url_redirect
       if session[:redir]
