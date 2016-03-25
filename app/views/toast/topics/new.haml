@@ -7,7 +7,7 @@
           %ul.tabs
             %li.tab.col.s6
               %a{href: '#text'} Text Topic
-            - if session[:params][:link_topic]
+            - if session[:params] && session[:params][:link_topic]
               %li.tab.col.s6
                 %a.active{href: '#link'} Link Topic
             - else
@@ -19,10 +19,10 @@
             %form.col.s12{action: '/toast-it/topics', method: 'post'}
               .row
                 .input-field.col.s12
-                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params][:title]}
+                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params] ? session[:params][:title] : nil}
                   %label{for: 'title'} Topic Title
                 .input-field.col.s12
-                  %textarea.materialize-textarea#content{name: 'topic[content]', required: true, value: session[:params][:content]}
+                  %textarea.materialize-textarea#content{name: 'topic[content]', required: true, value: session[:params] ? session[:params][:content] : nil}
                   %label{for: 'content'} Topic Contents
               .row
                 .col.s12
@@ -35,10 +35,10 @@
             %form.col.s12{action: '/toast-it/topics', method: 'post'}
               .row
                 .input-field.col.s12
-                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params][:title]}
+                  %input.validate#title{type: 'text', name: 'topic[title]', required: true, value: session[:params] ? session[:params][:title] : nil}
                   %label{for: 'title'} Topic Title
                 .input-field.col.s12
-                  %input.validate#content{type: 'url', name: 'topic[content]', required: true, value: session[:params][:content]}
+                  %input.validate#content{type: 'url', name: 'topic[content]', required: true, value: session[:params] ? session[:params][:content] : nil}
                   %label{for: 'content'} Topic URL
               .row
                 .col.s12
